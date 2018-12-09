@@ -23,7 +23,7 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     echo "bashCompletion" >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-COPY .shell-methods .zshrc .oh-my-zsh/custom/themes/cyb.zsh-theme /root/
+COPY .shell-methods .zshrc /root/
 COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /root/.vimrc
 
@@ -40,7 +40,7 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     echo "bashCompletion" >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-COPY .shell-methods .zshrc .oh-my-zsh/custom/themes/cyb.zsh-theme /home/application/
+COPY .shell-methods .zshrc /home/application/
 COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /home/application/.vimrc
 
