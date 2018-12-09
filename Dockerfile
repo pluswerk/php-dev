@@ -5,7 +5,7 @@ RUN \
     echo "deb http://deb.debian.org/debian stretch-updates universe" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian stretch multiverse" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian stretch-updates multiverse" >> /etc/apt/sources.list && \
-    apt-get update && apt-get -y dist-upgrade && \
+    apt-get update && \
     apt-get install -y sudo less vim nano diffutils tree git-core bash-completion zsh htop && \
     rm -rf /var/lib/apt/lists/* && \
     usermod -aG sudo application && \
