@@ -24,7 +24,7 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc .oh-my-zsh/custom/themes/cyb.zsh-theme /root/
-COPY .oh-my-zsh/custom/themes/cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
+COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /root/.vimrc
 
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
@@ -41,7 +41,7 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc .oh-my-zsh/custom/themes/cyb.zsh-theme /home/application/
-COPY .oh-my-zsh/custom/themes/cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
+COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /home/application/.vimrc
 
 COPY .additional_bashrc.sh /home/application/.additional_bashrc.sh
