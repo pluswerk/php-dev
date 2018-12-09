@@ -20,7 +20,7 @@ ZSH_THEME="cyb"
 # Case sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_UPDATE="true"
 export UPDATE_ZSH_DAYS=90
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
