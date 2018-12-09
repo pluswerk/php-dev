@@ -10,44 +10,35 @@ RUN \
     rm -rf /var/lib/apt/lists/* && \
     usermod -aG sudo application && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    update-alternatives --set editor /usr/bin/vim.basic
+    update-alternatives --set editor /usr/bin/vim.basic && \
+    mkdir /tmp/docker-files
+
+COPY .bashrc /tmp/docker-files/.bashrc
+COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 
 RUN curl -fsSL https://get.docker.com/ | sh && \
   sudo usermod -aG docker application && \
   sudo usermod -aG 999 application
 
 # Configure root
-RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
-    echo "addAlias" >> ~/.bashrc && \
-    echo "stylePS1" >> ~/.bashrc && \
-    echo "bashCompletion" >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f /root/.ssh/id_rsa -P ''
+    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
 
 COPY .shell-methods .zshrc /root/
 COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /root/.vimrc
 
-COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
-
 # Configure user
 USER application
 RUN composer global require hirak/prestissimo
 
-RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
-    echo "sshAgentRestart" >> ~/.bashrc && \
-    echo "sshAgentAddKey 7d ~/.ssh/id_rsa" >> ~/.bashrc && \
-    echo "stylePS1" >> ~/.bashrc && \
-    echo "bashCompletion" >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f /home/application/.ssh/id_rsa -P ''
-
+    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
 
 COPY .shell-methods .zshrc /home/application/
 COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
 COPY .vimrc /home/application/.vimrc
-
-COPY .additional_bashrc.sh /home/application/.additional_bashrc.sh
-RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 
 USER root
