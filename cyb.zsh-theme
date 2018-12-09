@@ -59,40 +59,6 @@ cyb_get_space() {
     echo $SPACES
 }
 
-cyb_prompt_color_palette() {
-    local palette
-    palette=()
-
-    palette+="%{$FG[075]%}●"
-    palette+="%{$FG[111]%}●"
-    palette+="%{$FG[117]%}●"
-    palette+="%{$FG[105]%}●"
-    palette+="%{$FG[032]%}●"
-    palette+=" "
-
-    palette+="%{$FG[237]%}●"
-    palette+="%{$FG[103]%}●"
-    palette+="%{$FG[242]%}●"
-    palette+=" "
-
-    palette+="%{$FG[133]%}●"
-    palette+="%{$FG[124]%}●"
-    palette+="%{$FG[208]%}●"
-    palette+="%{$FG[214]%}●"
-    palette+=" "
-
-    palette+="%{$FG[148]%}●"
-    palette+="%{$FG[077]%}●"
-    palette+="%{$FG[118]%}●"
-    palette+="%{$FG[078]%}●"
-    palette+=" "
-
-    if [[ -n "$palette" ]]; then
-        palette+="%{$reset_color%}"
-    fi;
-    echo "$palette";
-}
-
 cyb_prompt_status() {
     local symbols
     symbols=()
