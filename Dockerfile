@@ -21,7 +21,8 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     echo "addAlias" >> ~/.bashrc && \
     echo "stylePS1" >> ~/.bashrc && \
     echo "bashCompletion" >> ~/.bashrc && \
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f /root/.ssh/id_rsa -P ''
 
 COPY .shell-methods .zshrc /root/
 COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
@@ -38,7 +39,9 @@ RUN echo "source ~/.shell-methods" >> ~/.bashrc && \
     echo "sshAgentAddKey 7d ~/.ssh/id_rsa" >> ~/.bashrc && \
     echo "stylePS1" >> ~/.bashrc && \
     echo "bashCompletion" >> ~/.bashrc && \
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f /home/application/.ssh/id_rsa -P ''
+
 
 COPY .shell-methods .zshrc /home/application/
 COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
