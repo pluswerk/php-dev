@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     environment:
-      - VIRTUAL_HOST=~^(.+\.)?docker-website\.(vm|vm\d+\.iveins\.de)$$
+      - VIRTUAL_HOST=~^(.+\.)?docker-website\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
       - PHP_DISMOD=ioncube
       # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
