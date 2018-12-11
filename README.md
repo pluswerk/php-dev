@@ -2,7 +2,7 @@
 
 ## Docker compose
 
-File: docker-compose.yaml
+Example File: docker-compose.yaml
 
 ```yaml
 version: '3.5'
