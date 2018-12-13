@@ -16,9 +16,7 @@ RUN \
 COPY .bashrc-additional /tmp/docker-files/.bashrc-additional
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 
-RUN curl -fsSL https://get.docker.com/ | sh && \
-  sudo usermod -aG docker application && \
-  sudo usermod -aG 999 application
+RUN curl -fsSL https://get.docker.com/ | sh
 
 # Configure root
 RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
