@@ -1,5 +1,9 @@
 # PHP-dev
 
+## Links:
+
+Made to use with [pluswerk/docker-global](https://github.com/pluswerk/docker-global).
+
 ## Docker compose
 
 Example File: docker-compose.yaml
