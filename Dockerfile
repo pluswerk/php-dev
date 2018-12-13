@@ -22,8 +22,7 @@ RUN curl -fsSL https://get.docker.com/ | sh && \
 
 # Configure root
 RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc /root/
 COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
@@ -34,8 +33,7 @@ USER application
 RUN composer global require hirak/prestissimo
 
 RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
-    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc /home/application/
 COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
