@@ -7,9 +7,7 @@ RUN apt-get update && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-RUN curl -fsSL https://get.docker.com/ | sh && \
-  sudo usermod -aG docker application && \
-  sudo usermod -aG 999 application
+RUN curl -fsSL https://get.docker.com/ | sh
 
 USER application
 RUN composer global require hirak/prestissimo
