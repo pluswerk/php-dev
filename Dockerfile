@@ -13,7 +13,7 @@ RUN \
     update-alternatives --set editor /usr/bin/vim.basic && \
     mkdir /tmp/docker-files
 
-COPY .bashrc /tmp/docker-files/.bashrc
+COPY .bashrc-additional /tmp/docker-files/.bashrc-additional
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 
 RUN curl -fsSL https://get.docker.com/ | sh && \
@@ -21,7 +21,7 @@ RUN curl -fsSL https://get.docker.com/ | sh && \
   sudo usermod -aG 999 application
 
 # Configure root
-RUN cat /tmp/docker-files/.bashrc >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
 
@@ -33,7 +33,7 @@ COPY .vimrc /root/.vimrc
 USER application
 RUN composer global require hirak/prestissimo
 
-RUN cat /tmp/docker-files/.bashrc >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     ssh-keygen -t rsa -b 4096 -C 'Auto generated, overwrite with volume mount' -f ~/.ssh/id_rsa -P ''
 
