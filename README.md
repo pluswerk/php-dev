@@ -37,6 +37,12 @@ services:
       - php.display_errors=1
     working_dir: /app
 
+  node:
+    image: node:lts
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: tail -f /dev/null
 networks:
   default:
     external:
