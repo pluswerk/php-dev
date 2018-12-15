@@ -13,13 +13,13 @@ RUN \
     update-alternatives --set editor /usr/bin/vim.basic && \
     mkdir /tmp/docker-files
 
-COPY .bashrc-additional /tmp/docker-files/.bashrc-additional
+COPY .bashrc-additional.sh /tmp/docker-files/.bashrc-additional.sh
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 
 RUN curl -fsSL https://get.docker.com/ | sh
 
 # Configure root
-RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc-additional.sh >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc /root/
@@ -30,7 +30,7 @@ COPY .vimrc /root/.vimrc
 USER application
 RUN composer global require hirak/prestissimo
 
-RUN cat /tmp/docker-files/.bashrc-additional >> ~/.bashrc && \
+RUN cat /tmp/docker-files/.bashrc-additional.sh >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 COPY .shell-methods .zshrc /home/application/
