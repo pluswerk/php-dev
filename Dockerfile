@@ -1,4 +1,9 @@
+FROM golang AS mhsendmail
+RUN go get github.com/mailhog/mhsendmail
+
 FROM webdevops/php-apache-dev:7.3
+
+COPY --from=mhsendmail /go/bin/mhsendmail /home/application/go/bin/mhsendmail
 
 RUN \
     echo "deb http://deb.debian.org/debian stretch universe" >> /etc/apt/sources.list && \

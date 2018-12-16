@@ -29,7 +29,7 @@ services:
       - VIRTUAL_HOST=~^(.+\.)?docker-website\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
       - PHP_DISMOD=ioncube
-      # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
+      - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
       - XDEBUG_REMOTE_HOST=192.168.178.123
       - XDEBUG_REMOTE_PORT=9000
       - php.xdebug.idekey=PHPSTORM
@@ -49,4 +49,3 @@ networks:
     external:
       name: global
 ```
-
