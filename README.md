@@ -42,11 +42,9 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
-    command: tail -f /dev/null
 
 networks:
   default:
     external:
       name: global
 ```
-

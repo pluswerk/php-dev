@@ -91,9 +91,9 @@ function addAlias {
 
 function addDockerAlias {
     DOCKER_COMPOSE_PROJECT=$(sudo docker inspect ${HOSTNAME} | grep '"com.docker.compose.project":' | awk '{print $2}' | tr --delete '"' | tr --delete ',')
-    NODE_CONTAINER=$(sudo docker ps -f "name=${DOCKER_COMPOSE_PROJECT}_node_1" --format {{.Names}})
-    alias node='sudo docker exec -w $(pwd) -it ${NODE_CONTAINER} node'
-    alias npm='sudo docker exec -w $(pwd) -it ${NODE_CONTAINER} npm'
-    alias yarn='sudo docker exec -w $(pwd) -it ${NODE_CONTAINER} yarn'
+    NODE_CONTAINER=$(sudo docker ps -a -f "name=${DOCKER_COMPOSE_PROJECT}_node_1" --format {{.Names}})
+    NODE_IMAGE=$(sudo docker container inspect --format='{{.Image}}' ${NODE_CONTAINER} | cut -d: -f2)
+    alias node='sudo docker run -w $(pwd) -it ${NODE_IMAGE} node'
+    alias npm='sudo docker run -w $(pwd) -it ${NODE_IMAGE} npm'
+    alias yarn='sudo docker run -w $(pwd) -it ${NODE_IMAGE} yarn'
 }
-
