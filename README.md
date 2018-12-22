@@ -19,7 +19,14 @@ services:
 
     volumes:
       - .:/app
-      - ~/.ssh:/home/application/.ssh
+      - ~/.ssh/config:/home/application/.ssh/config:ro
+      - ~/.ssh/id_rsa:/home/application/.ssh/id_rsa:ro
+      - ~/.ssh/id_rsa.pub:/home/application/.ssh/id_rsa.pub:ro
+      - ~/.ssh/known_hosts:/home/application/.ssh/known_hosts:ro
+      - ~/.ssh/config:/root/.ssh/config:ro
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+      - ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub:ro
+      - ~/.ssh/known_hosts:/root/.ssh/known_hosts:ro
       - ~/.composer/cache:/home/application/.composer/cache
       - ~/.gitconfig:/home/application/.gitconfig
 
@@ -49,4 +56,3 @@ networks:
     external:
       name: global
 ```
-
