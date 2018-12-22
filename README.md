@@ -30,11 +30,17 @@ services:
       - WEB_DOCUMENT_ROOT=/app/public
       - PHP_DISMOD=ioncube
       # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
-      - XDEBUG_REMOTE_HOST=192.168.178.123
-      - XDEBUG_REMOTE_PORT=9000
-      - php.xdebug.idekey=PHPSTORM
-      - php.xdebug.remote_log=/app/xdebug.log
       - php.display_errors=1
+
+      - php.xdebug.cli_color=1
+      - php.xdebug.idekey=PHPSTORM
+      - php.xdebug.max_nesting_level=400
+      - php.xdebug.remote_enable=On
+      - php.xdebug.remote_connect_back=On
+      #- php.xdebug.remote_host=192.168.178.123
+      - php.xdebug.remote_port=9000
+      - php.xdebug.remote_autostart=On
+      - php.xdebug.remote_log=/tmp/xdebug.log
     working_dir: /app
 
   node:
@@ -49,4 +55,3 @@ networks:
     external:
       name: global
 ```
-
