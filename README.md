@@ -19,6 +19,7 @@ services:
 
     volumes:
       - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ~/.ssh:/home/application/.ssh
       - ~/.composer/cache:/home/application/.composer/cache
       - ~/.gitconfig:/home/application/.gitconfig
@@ -49,4 +50,3 @@ networks:
     external:
       name: global
 ```
-
