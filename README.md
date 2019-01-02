@@ -37,6 +37,10 @@ services:
       - php.xdebug.remote_log=/app/xdebug.log
       - php.display_errors=1
 
+      # GraphicMagick or ImageMagick, only one can be active
+      - php.extension=gmagick.so
+      #- php.extension=imagick.so
+
       # SSL: Use default cert from global-nginx-proxy
       - CERT_NAME=default
       # SSL: Do not a redirect in global-nginx-proxy, if you use another port than 443
