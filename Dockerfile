@@ -22,9 +22,9 @@ RUN curl -fsSL https://get.docker.com/ | sh
 RUN cat /tmp/docker-files/.bashrc-additional.sh >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-COPY .shell-methods .zshrc /root/
-COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/cyb.zsh-theme
-COPY .vimrc /root/.vimrc
+COPY .shell-methods .zshrc .vimrc /root/
+COPY cyb.zsh-theme /root/.oh-my-zsh/custom/themes/
+COPY ssh-agent.plugin.zsh /root/.oh-my-zsh/custom/plugins/ssh-agent/
 
 # Configure user
 USER application
@@ -33,12 +33,9 @@ RUN composer global require hirak/prestissimo
 RUN cat /tmp/docker-files/.bashrc-additional.sh >> ~/.bashrc && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
-# Add folder to fix root permissions
-RUN mkdir ~/.ssh
-
-COPY .shell-methods .zshrc /home/application/
-COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/cyb.zsh-theme
-COPY .vimrc /home/application/.vimrc
+COPY .shell-methods .zshrc .vimrc /home/application/
+COPY cyb.zsh-theme /home/application/.oh-my-zsh/custom/themes/
+COPY ssh-agent.plugin.zsh /home/application/.oh-my-zsh/custom/plugins/ssh-agent/
 
 USER root
 
