@@ -15,6 +15,7 @@ RUN \
 
 COPY .bashrc-additional.sh /tmp/docker-files/.bashrc-additional.sh
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
+COPY entrypoint-pluswerk.sh /entrypoint.d/
 
 RUN curl -fsSL https://get.docker.com/ | sh
 
