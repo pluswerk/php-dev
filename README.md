@@ -20,7 +20,7 @@ services:
     volumes:
       - .:/app
       - ~/.ssh:/home/application/.ssh:ro
-      # Note: /home/application/.ssh will be copied to /root/.ssh
+      # Note: /home/application/.ssh will be copied to /root/.ssh if is empty or not exists
       - ~/.composer/cache:/home/application/.composer/cache
       - ~/.gitconfig:/home/application/.gitconfig
 
