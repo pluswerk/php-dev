@@ -30,10 +30,9 @@ if [[ $_agent_forwarding == "yes" && -n "$SSH_AUTH_SOCK" ]]; then
 elif [[ -f "$_ssh_env_cache" ]]; then
 	# Source SSH settings, if applicable
 	. $_ssh_env_cache > /dev/null
+	FILTER="x"
 	if [[ $USER == "root" ]]; then
 		FILTER="ax"
-	else
-		FILTER="x"
 	fi
 	ps $FILTER | grep ssh-agent | grep -q $SSH_AGENT_PID || {
 		_start_agent
