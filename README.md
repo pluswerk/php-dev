@@ -88,7 +88,7 @@ RUN apt install -y graphicsmagick gcc libgraphicsmagick1-dev && \
 ```
 
 For whatever reason, you can only activate one of them in PHP. If you activate both, PHP will not work properly anymore.
-Therefore either ImageMagick or GraphicMagick:
+Therefore either use ImageMagick or GraphicMagick:
 
 ```dockerfile
 # For ImageMagick
