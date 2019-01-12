@@ -37,10 +37,6 @@ services:
       - php.xdebug.remote_log=/app/xdebug.log
       - php.display_errors=1
 
-      # GraphicMagick or ImageMagick, only one can be active
-      - php.extension=gmagick.so
-      #- php.extension=imagick.so
-
       # SSL: Use default cert from global-nginx-proxy
       - CERT_NAME=default
       # SSL: Do not a redirect in global-nginx-proxy, if you use another port than 443
@@ -58,4 +54,46 @@ networks:
   default:
     external:
       name: global
+```
+
+## ImageMagick & GraphicMagick included in PHP
+
+If you need ImageMagick or GraphicMagick as a PHP module, you need to install and activate it.
+You can create your own Dockerfile and derive from this image.
+
+Both are already preinstalled in the Docker image and it is recommended that you use these binarys instead of the PHP module.
+
+For Example:
+
+```php
+<?php exec('/usr/bin/convert ...');
+```
+
+### Install ImageMagick or GraphicMagick included in PHP
+
+If you still want to install and activate the PHP module, then create your own Dockerfile.
+
+Install ImageMagick:
+
+```dockerfile
+RUN apt install -y imagemagick libmagickwand-dev && printf "\n" | pecl install imagick
+```
+
+Install GraphicMagick:
+
+```dockerfile
+RUN apt install -y graphicsmagick gcc libgraphicsmagick1-dev && \
+    PHP_VERSION=`php -r "echo version_compare(PHP_VERSION, '7.0.0', '<');";` && \
+    if [ "${PHP_VERSION}" = "1" ]; then printf "\n" | pecl install gmagick-1.1.7RC3; else printf "\n" | pecl install gmagick-2.0.5RC1; fi;
+```
+
+For whatever reason. You can only activate one of them in PHP. If you activate both then PHP will not work properly anymore.
+Therefore either ImageMagick or GraphicMagick:
+
+```dockerfile
+# For ImageMagick
+RUN echo 'extension=imagick.so' >> /usr/local/etc/php/conf.d/docker-php-ext-magick.ini;
+
+# For GraphicMagick
+RUN echo 'extension=gmagick.so' >> /usr/local/etc/php/conf.d/docker-php-ext-magick.ini;
 ```

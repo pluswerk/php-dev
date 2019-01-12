@@ -9,12 +9,6 @@ RUN apt-get update && \
 
 RUN curl -fsSL https://get.docker.com/ | sh
 
-# Install ImageMagick & GraphicMagick for PHP
-RUN apt install -y imagemagick libmagickwand-dev && printf "\n" | pecl install imagick && \
-    apt install -y graphicsmagick gcc libgraphicsmagick1-dev && \
-    PHP_VERSION=`php -r "echo version_compare(PHP_VERSION, '7.0.0', '<');";` && \
-    if [ "${PHP_VERSION}" = "1" ]; then printf "\n" | pecl install gmagick-1.1.7RC3; else printf "\n" | pecl install gmagick-2.0.5RC1; fi;
-
 USER application
 RUN composer global require hirak/prestissimo
 
