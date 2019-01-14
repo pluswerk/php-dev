@@ -6,7 +6,7 @@ Made to use with [pluswerk/docker-global](https://github.com/pluswerk/docker-glo
 
 ## Docker compose
 
-Example File: docker-compose.yaml
+Example File: docker-compose.yml
 
 ```yaml
 version: '3.5'
