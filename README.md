@@ -13,8 +13,6 @@ version: '3.5'
 
 services:
   web:
-    restart: always
-    #build: php-dev
     image: pluswerk/php-dev:nginx-7.2
 
     volumes:
