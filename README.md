@@ -37,10 +37,11 @@ services:
       - php.xdebug.remote_log=/app/xdebug.log
       - php.display_errors=1
 
-      # SSL: Use default cert from global-nginx-proxy
-      - CERT_NAME=default
-      # SSL: Do not a redirect in global-nginx-proxy, if you use another port than 443
-      - HTTPS_METHOD=noredirect
+      # Project Env vars (enable what you need)
+#      - APP_ENV=development_docker
+#      - PIMCORE_ENVIRONMENT=development_docker
+#      - TYPO3_CONTEXT=Development/docker
+
     working_dir: /app
 
   node:
@@ -54,6 +55,41 @@ networks:
   default:
     external:
       name: global
+```
+
+# Documentation
+
+The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-dev] respectivly. ([github])
+
+[webdevops/php-apache-dev]: https://hub.docker.com/r/webdevops/php-apache-dev
+[webdevops/php-nginx-dev]: https://hub.docker.com/r/webdevops/php-nginx-dev
+[github]: https://github.com/webdevops/Dockerfile
+
+## TYPO3 AdditionalConfiguration.php Example
+```php
+if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = getenv('typo3DatabaseHost') ?: 'global-db';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port'] = getenv('typo3DatabasePort') ?: '3306';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('typo3DatabaseUsername') ?: 'root';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('typo3DatabasePassword') ?: 'root';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
+
+    $smtpMailServer = getenv('SMTP_MAIL_SERVER');
+    if ($smtpMailServer === '') {
+        $smtpMailServer = 'global-mail:1025';
+    }
+    if ($smtpMailServer !== false) {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = $smtpMailServer;
+    }
+//    $vmNumber = getenv('VM_NUMBER');
+//    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
+//        throw new \Exception('env VM_NUMBER needed! it must be an int!');
+//    }
+//    $domainPrefix = getenv('DOMAIN_PREFIX') ?: '';
+//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
+//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainB'] = sprintf('cn.%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
+}
 ```
 
 ## ImageMagick & GraphicMagick included in PHP
