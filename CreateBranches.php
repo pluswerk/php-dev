@@ -26,9 +26,9 @@ final class CreateBranches
         `git checkout master -f && git push`;
         foreach ($this->config as $branch => $FROM) {
             `git checkout master -f && git reset Dockerfile && git checkout Dockerfile && git checkout -B $branch`;
-            $lines = file("Dockerfile");
-            $lines[0] = "FROM $FROM\n";
-            file_put_contents("Dockerfile", $lines);
+            $dockerfile = file_get_contents('Dockerfile');
+            $dockerfile = preg_replace('/^FROM webdevops\/php-apache-dev:\d\.\d$/im', 'FROM ' . $FROM, $dockerfile);
+            file_put_contents('Dockerfile', $dockerfile);
             `git add Dockerfile && git commit -m 'set image version to $branch with FROM $FROM'`;
         }
         $branches = implode(' ', array_keys($this->config));
