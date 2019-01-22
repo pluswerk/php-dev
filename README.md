@@ -22,19 +22,20 @@ services:
       - ~/.composer/cache:/home/application/.composer/cache
       - ~/.gitconfig:/home/application/.gitconfig
 
-    env_file:
-      - .env
     environment:
-      - VIRTUAL_HOST=~^(.+\.)?docker-website\.vm$$
+      - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
-      - PHP_DISMOD=ioncube
-      # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
-      - XDEBUG_REMOTE_HOST=192.168.178.123
-      - XDEBUG_REMOTE_PORT=9000
-      - php.xdebug.idekey=PHPSTORM
-      - php.xdebug.remote_log=/app/xdebug.log
-      - php.display_errors=1
+      - PHP_DISMOD=${PHP_DISMOD-ioncube}
+      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
+      - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
+      - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
+      - php.xdebug.remote_log=${XDEBUG_REMOTE_LOG:-/logs/xdebug.log}
+      - PHP_DEBUGGER=${PHP_DEBUGGER:-none}
+      - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
+      - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
 
+      # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
+      
       # Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
 #      - PIMCORE_ENVIRONMENT=development_docker
