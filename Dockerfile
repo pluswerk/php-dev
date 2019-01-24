@@ -2,7 +2,7 @@ FROM webdevops/php-apache-dev:7.3
 
 # add sudo; without password
 RUN apt-get update && \
-  apt-get install -y sudo vim nano tree bash-completion mysql-client && \
+  apt-get install -y sudo vim nano less tree bash-completion mysql-client && \
   rm -rf /var/lib/apt/lists/* && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
