@@ -10,7 +10,7 @@ RUN apt-get update && \
 RUN curl -fsSL https://get.docker.com/ | sh
 
 USER application
-RUN composer global require hirak/prestissimo
+RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
 
 # add .git-completion.bash
 RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash

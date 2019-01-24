@@ -1,5 +1,5 @@
 alias ll='ls -alh'
-export PATH=$PATH:./bin:./vendor/bin:./node_modules/.bin
+export PATH=$PATH:~/.composer/vendor/bin:./bin:./vendor/bin:./node_modules/.bin
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 
