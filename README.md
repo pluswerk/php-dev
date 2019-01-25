@@ -64,30 +64,93 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 [webdevops/php-nginx-dev]: https://hub.docker.com/r/webdevops/php-nginx-dev
 [github]: https://github.com/webdevops/Dockerfile
 
-## TYPO3 AdditionalConfiguration.php Example
-```php
-if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
-    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = getenv('typo3DatabaseHost') ?: 'global-db';
-    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port'] = getenv('typo3DatabasePort') ?: '3306';
-    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('typo3DatabaseUsername') ?: 'root';
-    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('typo3DatabasePassword') ?: 'root';
-    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
+## TYPO3 AdditionalConfiguration.php examples
 
-    $smtpMailServer = getenv('SMTP_MAIL_SERVER');
-    if ($smtpMailServer === '') {
-        $smtpMailServer = 'global-mail:1025';
+### TYPO3 database configuration
+
+Configure as environment variable:
+
+```bash
+DATABASE_URL=mysql://global-db
+DATABASE_URL=mysql://global-db/database_name
+DATABASE_URL=mysql://username:password@127.0.0.1:3306/database_name
+```
+
+Add php code in additional configuration:
+
+```php
+<?php
+if (isset($_SERVER['TYPO3_CONTEXT']) && $_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
+    // Configure database
+    $configDatabase = parse_url(getenv('DATABASE_URL'));
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = isset($configDatabase['host']) ? $configDatabase['host'] : 'global-db';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port'] = isset($configDatabase['port']) ? $configDatabase['port'] : '3306';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = isset($configDatabase['user']) ? $configDatabase['user'] : 'root';
+    $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = isset($configDatabase['pass']) ? $configDatabase['pass'] : 'root';
+    if (isset($configDatabase['path']) && trim($configDatabase['path'], '/') !== '') {
+        $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = trim($configDatabase['path'], '/');
     }
-    if ($smtpMailServer !== false) {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = $smtpMailServer;
+}
+```
+
+### TYPO3 mail configuration
+
+Configure as environment variable:
+
+```bash
+MAILER_URL=sendmail://localhost/home/user/go/bin/mhsendmail
+
+MAILER_URL=smtp://global-mail:1025
+MAILER_URL=smtp://username:passwort@smtp.example.org:25
+MAILER_URL=smtp://info@example.org:passwort@smtp.gmail.com?encryption=tls
+```
+
+Add php code in additional configuration:
+
+```php
+<?php
+if (isset($_SERVER['TYPO3_CONTEXT']) && $_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
+    // Configure mail
+    $configMail = parse_url(getenv('MAILER_URL'));
+    if (isset($configMail['scheme'])) {
+        $configMailQuery = [];
+        if (isset($configMail['query'])) {
+            parse_str($configMail['query'], $configMailQuery);
+        }
+
+        if ($configMail['scheme'] === 'sendmail') {
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'sendmail';
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_sendmail_command'] = isset($configMail['path']) ? $configMail['path'] : '/home/user/go/bin/mhsendmail';
+        } else if ($configMail['scheme'] === 'smtp') {
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_encrypt'] = isset($configMailQuery['encryption']) ? $configMailQuery['encryption'] : '';
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_password'] = isset($configMail['pass']) ? $configMail['pass'] : '';
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_username'] = isset($configMail['user']) ? $configMail['user'] : '';
+
+            $mailServer = isset($configMail['host']) ? $configMail['host'] : '';
+            if (isset($configMail['port'])) {
+                $mailServer .= ':' . $configMail['port'];
+            }
+            $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = $mailServer;
+        }
     }
-//    $vmNumber = getenv('VM_NUMBER');
-//    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
-//        throw new \Exception('env VM_NUMBER needed! it must be an int!');
-//    }
-//    $domainPrefix = getenv('DOMAIN_PREFIX') ?: '';
-//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
-//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainB'] = sprintf('cn.%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
+}
+```
+
+### More TYPO3 configuration examples
+
+Configure extension with virtual machine number.
+
+```php
+<?php
+if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
+    $vmNumber = getenv('VM_NUMBER');
+    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
+        throw new \Exception('env VM_NUMBER needed! it must be an int!');
+    }
+    $domainPrefix = getenv('DOMAIN_PREFIX') ?: '';
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainB'] = sprintf('cn.%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
 }
 ```
 
