@@ -72,17 +72,17 @@ However, if the folder name is the same as another project, there is a problem a
 To fix this, you can specify the project name itself in the ``.env`` file:
 
 ```bash
-COMPOSE_PROJECT_NAME=my-project1
+COMPOSE_PROJECT_NAME=my-project1_www
 ```
 
 After starting both containers:
 
 ```text
 /my-project1/www/docker-compose.yaml, container: web
-Project name: my-project1_web_1
+Project name: my-project1_www_web_1
 
 /my-project2/www/docker-compose.yaml, container: web
-Project name: my-project2_web_1
+Project name: my-project2_www_web_1
 ```
 
 # Documentation
