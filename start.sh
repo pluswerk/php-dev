@@ -12,19 +12,19 @@ function startFunction {
         return
         ;;
      up)
-        docker-compose -f docker-compose.dev.yml up -d
+        docker-compose -f docker-compose.yml up -d
         return
         ;;
      down)
-        docker-compose -f docker-compose.dev.yml down --remove-orphans
+        docker-compose -f docker-compose.yml down --remove-orphans
         return
         ;;
      login)
-        docker-compose -f docker-compose.dev.yml exec -u application web bash
+        docker-compose -f docker-compose.yml exec -u application web bash
         return
         ;;
      *)
-        docker-compose -f docker-compose.dev.yml "${@:1}"
+        docker-compose -f docker-compose.yml "${@:1}"
         return
         ;;
   esac
