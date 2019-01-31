@@ -73,14 +73,13 @@ if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('typo3DatabasePassword') ?: 'root';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
 
-    $smtpMailServer = getenv('SMTP_MAIL_SERVER');
-    if ($smtpMailServer === '') {
-        $smtpMailServer = 'global-mail:1025';
-    }
-    if ($smtpMailServer !== false) {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = $smtpMailServer;
-    }
+    
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_encrypt'] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_username'] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_password'] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = getenv('SMTP_MAIL_SERVER') ?: 'global-mail:1025';
+        
 //    $vmNumber = getenv('VM_NUMBER');
 //    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
 //        throw new \Exception('env VM_NUMBER needed! it must be an int!');
