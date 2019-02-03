@@ -2,12 +2,16 @@ FROM webdevops/php-apache-dev:7.3
 
 # add sudo; without password
 RUN apt-get update && \
-  apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
+  apt-get install -y sudo curl vim nano less tree bash-completion mysql-client iputils-ping && \
   rm -rf /var/lib/apt/lists/* && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN curl -fsSL https://get.docker.com/ | sh
+
+RUN curl -o /usr/local/bin/mhsendmail -SL "https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_$(dpkg --print-architecture)" && \
+    chmod +x /usr/local/bin/mhsendmail
+ENV PHP_SENDMAIL_PATH="'/usr/local/bin/mhsendmail --smtp-addr=global-mail:1025'"
 
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
