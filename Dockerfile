@@ -7,6 +7,8 @@ RUN apt-get update && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+COPY entrypoint.d/* /entrypoint.d/
+
 RUN curl -fsSL https://get.docker.com/ | sh
 
 USER application
