@@ -1,6 +1,6 @@
 # PHP-DEV
 
-The development of a website is simplified using PHP-DEV.
+The development of a website is simplified by using PHP-DEV.
 It mainly differentiates whether an Apache or Nginx is used and which PHP version is used.
 It is recommended to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as this Dockerfile will build on it.
 
