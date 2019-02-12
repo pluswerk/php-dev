@@ -131,3 +131,12 @@ RUN echo 'extension=imagick.so' >> /usr/local/etc/php/conf.d/docker-php-ext-magi
 # For GraphicMagick
 RUN echo 'extension=gmagick.so' >> /usr/local/etc/php/conf.d/docker-php-ext-magick.ini;
 ```
+
+## Mail
+
+If you use another mail server you can specify it in docker-compose.yaml file via RelayHost.
+
+```dockerfile
+environment:
+  - POSTFIX_RELAYHOST=[global-mail]:1025
+```
