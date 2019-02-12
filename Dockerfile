@@ -24,3 +24,4 @@ COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 
 USER root
+ENV POSTFIX_RELAYHOST="[global-mail]:1025"
