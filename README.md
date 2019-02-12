@@ -136,7 +136,7 @@ RUN echo 'extension=gmagick.so' >> /usr/local/etc/php/conf.d/docker-php-ext-magi
 
 If you use another mail server you can specify it in docker-compose.yaml file via RelayHost.
 
-```dockerfile
+```yaml
 environment:
   - POSTFIX_RELAYHOST=[global-mail]:1025
 ```
