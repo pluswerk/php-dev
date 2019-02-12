@@ -2,7 +2,7 @@
 
 The development of a website is simplified by using PHP-DEV.
 It mainly differentiates whether an Apache or Nginx is used and which PHP version is used.
-It is recommended to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as this Dockerfile will build on it.
+We recommend to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects since this Dockerfile has been build by keeping that in mind.
 
 ## Docker compose
 
