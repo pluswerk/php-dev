@@ -1,7 +1,7 @@
 # PHP-DEV
 
-The development of a website is simplified by using PHP-DEV.
-It mainly differentiates whether an Apache or Nginx is used and which PHP version is used.
+PHP-DEV is a small package that includes a web server, PHP and some tools needed to develop a web page.
+You can easily decide with a docker-compose.yml which PHP version you want and if you want to start an Apache or a Nginx webserver.
 We recommend to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects since this Dockerfile has been build by keeping that in mind.
 
 ## Docker compose
