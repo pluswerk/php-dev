@@ -1,13 +1,11 @@
 FROM webdevops/php-apache-dev:7.3
 
-# add sudo; without password
 RUN apt-get update && \
   apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
-  rm -rf /var/lib/apt/lists/* && \
   usermod -aG sudo application && \
-  echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-RUN curl -fsSL https://get.docker.com/ | sh
+  echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+  curl -fsSL https://get.docker.com/ | sh && \
+  rm -rf /var/lib/apt/lists/*
 
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
