@@ -10,6 +10,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 
 * [TYPO3 configuration](typo3-configuration.md)
 * [ImageMagick or GraphicMagick](magick.md)
+* [Change docker project name](docker-project-name.md)
 
 ## Mail
 
