@@ -7,6 +7,8 @@ RUN apt-get update && \
   curl -fsSL https://get.docker.com/ | sh && \
   rm -rf /var/lib/apt/lists/*
 
+COPY entrypoint.d/* /entrypoint.d/
+
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
 
@@ -24,7 +26,3 @@ RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 USER root
 ENV POSTFIX_RELAYHOST="[global-mail]:1025"
 ENV PHP_DISMOD="ioncube"
-# set apache user group to application:
-RUN if [ -f /etc/apache2/envvars ]; then echo "export APACHE_RUN_GROUP=application" >> /etc/apache2/envvars ; fi
-# set nginx user group to application:
-RUN if [ -f /etc/nginx/nginx.conf ]; then sed -i 's/user www-data;/user www-data application;/g' /etc/nginx/nginx.conf ; fi
