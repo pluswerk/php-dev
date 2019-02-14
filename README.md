@@ -42,7 +42,7 @@ services:
 #      - TYPO3_CONTEXT=Development/docker
 
       # If your current user is not uid 1000, get in in container via: docker-compose exec -u ${UID} web bash
-      - APPLICATION_UID=1001
+      - APPLICATION_UID=${APPLICATION_UID:-1000}
       - APPLICATION_GID=1001
     working_dir: /app
 
