@@ -43,7 +43,7 @@ services:
 
       # If your current user is not uid 1000, get in in container via: docker-compose exec -u ${UID} web bash
       - APPLICATION_UID=${APPLICATION_UID:-1000}
-      - APPLICATION_GID=1001
+      - APPLICATION_GID=${APPLICATION_GID:-1000}
     working_dir: /app
 
   node:
