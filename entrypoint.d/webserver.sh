@@ -8,5 +8,5 @@ fi
 
 # Set nginx user
 if [ -f /etc/nginx/nginx.conf ]; then
-   sed -i "s/^user www-data;/user ${APPLICATION_USER};/" /etc/nginx/nginx.conf
+   sed -i "s/^user www-data;/user ${APPLICATION_USER} ${APPLICATION_GROUP};/" /etc/nginx/nginx.conf
 fi
