@@ -25,7 +25,6 @@ services:
     environment:
       - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
-      - PHP_DISMOD=${PHP_DISMOD-ioncube}
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
@@ -34,8 +33,6 @@ services:
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
 
-      # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
-      
       # Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
 #      - PIMCORE_ENVIRONMENT=development_docker
@@ -96,18 +93,12 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 ## TYPO3 AdditionalConfiguration.php Example
 ```php
 if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'mail';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'] = getenv('typo3DatabaseHost') ?: 'global-db';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['port'] = getenv('typo3DatabasePort') ?: '3306';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('typo3DatabaseUsername') ?: 'root';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('typo3DatabasePassword') ?: 'root';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
-
-    
-    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'smtp';
-    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_encrypt'] = '';
-    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_username'] = '';
-    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_password'] = '';
-    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_smtp_server'] = getenv('SMTP_MAIL_SERVER') ?: 'global-mail:1025';
         
 //    $vmNumber = getenv('VM_NUMBER');
 //    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
