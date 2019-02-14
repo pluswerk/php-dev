@@ -25,7 +25,8 @@ USER root
 
 ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
-    PHP_DISMOD="ioncube"
+    PHP_DISMOD="ioncube" \
+    PHP_DISPLAY_ERRORS="1"
 
 # set apache user group to application:
 RUN if [ -f /etc/apache2/envvars ]; then echo "export APACHE_RUN_GROUP=application" >> /etc/apache2/envvars ; fi
