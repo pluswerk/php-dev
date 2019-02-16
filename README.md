@@ -29,7 +29,6 @@ services:
     environment:
       - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
-      - PHP_DISMOD=${PHP_DISMOD-ioncube}
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
@@ -38,8 +37,6 @@ services:
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
 
-      # @todo - PHP_SENDMAIL_PATH="/home/application/go/bin/mhsendmail --smtp-addr=global-mail:1025"
-      
       # Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
 #      - PIMCORE_ENVIRONMENT=development_docker
