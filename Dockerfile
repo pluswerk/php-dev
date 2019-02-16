@@ -27,4 +27,5 @@ USER root
 
 ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
-    PHP_DISMOD="ioncube"
+    PHP_DISMOD="ioncube" \
+    PHP_DISPLAY_ERRORS="1"
