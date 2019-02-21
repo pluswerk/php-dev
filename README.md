@@ -23,7 +23,7 @@ services:
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
-      - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
+      - VIRTUAL_HOST=~^docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
