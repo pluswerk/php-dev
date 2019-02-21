@@ -23,6 +23,6 @@ After starting both containers:
 /my-project1/www/docker-compose.yml, container: web
 Project name: my-project1_www_web_1
 
-/my-project2/www/docker-compose.yaml, container: web
+/my-project2/www/docker-compose.yml, container: web
 Project name: my-project2_www_web_1
 ```
