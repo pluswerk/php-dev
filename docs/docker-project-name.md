@@ -20,7 +20,7 @@ COMPOSE_PROJECT_NAME=my-project1_www
 After starting both containers:
 
 ```text
-/my-project1/www/docker-compose.yaml, container: web
+/my-project1/www/docker-compose.yml, container: web
 Project name: my-project1_www_web_1
 
 /my-project2/www/docker-compose.yaml, container: web
