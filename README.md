@@ -110,6 +110,24 @@ if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
 }
 ```
 
+## Xdebug
+
+if you like to use xdebug, you can enable it via the `.env` file:
+````env
+PHP_DEBUGGER=xdebug
+XDEBUG_REMOTE_HOST=10.50.1.200
+````
+Where `XDEBUG_REMOTE_HOST` is the ip of your IDE.
+
+**CLI:** run any php script with this prefixed:
+````
+XDEBUG_CONFIG="remote_enable=1" php #...
+````
+
+**WEB:**
+
+We recomand usage of a enable disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.)
+
 ## ImageMagick & GraphicMagick included in PHP
 
 If you need ImageMagick or GraphicMagick as a PHP module, you need to install and activate it.
