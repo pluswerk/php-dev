@@ -104,9 +104,8 @@ if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
 //    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
 //        throw new \Exception('env VM_NUMBER needed! it must be an int!');
 //    }
-//    $domainPrefix = getenv('DOMAIN_PREFIX') ?: '';
-//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
-//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainB'] = sprintf('cn.%sproject.de.vm%d.iveins.de', $domainPrefix, $vmNumber);
+//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('project.de.vm%d.iveins.de', $vmNumber);
+//    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainB'] = sprintf('cn.project.de.vm%d.iveins.de', $vmNumber);
 }
 ```
 
