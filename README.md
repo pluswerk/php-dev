@@ -1,4 +1,4 @@
-# PHP-DEV
+# php-dev
 
 PHP-DEV is a small package that includes a web server, PHP and some tools needed to develop a web page.
 You can easily decide with a docker-compose.yml which PHP version you want and if you want to start an Apache or a Nginx webserver.
@@ -27,12 +27,12 @@ services:
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
-      - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
+      - VIRTUAL_HOST=~^docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
-      - php.xdebug.remote_log=${XDEBUG_REMOTE_LOG:-/logs/xdebug.log}
+      - php.xdebug.remote_log=${XDEBUG_REMOTE_LOG:-/tmp/xdebug.log}
       - PHP_DEBUGGER=${PHP_DEBUGGER:-none}
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
@@ -42,6 +42,9 @@ services:
 #      - PIMCORE_ENVIRONMENT=development_docker
 #      - TYPO3_CONTEXT=Development/docker
 
+      # Don't forget to connect via ./start.sh
+      - APPLICATION_UID=${APPLICATION_UID:-1000}
+      - APPLICATION_GID=${APPLICATION_GID:-1000}
     working_dir: /app
 
   node:
@@ -62,3 +65,11 @@ networks:
 See the [documentation] for more information.
 
 [documentation]: docs/index.md
+
+
+## Setup:
+
+Create a docker-compose.yml like the one from above.
+Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and maybe the Application Context.
+
+Then you can copy the [start.sh](start.sh) into your Project and start it.
