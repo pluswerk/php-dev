@@ -28,6 +28,8 @@ ENV \
     PHP_DISMOD="ioncube" \
     PHP_DISPLAY_ERRORS="1"
 
+COPY entrypoint.d/* /entrypoint.d/
+
 # set apache user group to application:
 RUN if [ -f /etc/apache2/envvars ]; then echo "export APACHE_RUN_GROUP=application" >> /etc/apache2/envvars ; fi
 # set nginx user group to application:
