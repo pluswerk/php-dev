@@ -24,7 +24,7 @@ function startFunction {
         return
         ;;
      *)
-        docker-compose "${@:1}"
+        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose "${@:1}"
         return
         ;;
   esac
