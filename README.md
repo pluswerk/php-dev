@@ -23,12 +23,12 @@ services:
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
-      - VIRTUAL_HOST=~^${DOMAIN_PREFIX:-}docker-website-[a-z]+\.vm$$
+      - VIRTUAL_HOST=~^docker-website-[a-z]+\.vm$$
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
-      - php.xdebug.remote_log=${XDEBUG_REMOTE_LOG:-/logs/xdebug.log}
+      - php.xdebug.remote_log=${XDEBUG_REMOTE_LOG:-/tmp/xdebug.log}
       - PHP_DEBUGGER=${PHP_DEBUGGER:-none}
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
