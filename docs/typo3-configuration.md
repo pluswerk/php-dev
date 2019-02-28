@@ -1,5 +1,7 @@
 # TYPO3 configuration
 
+For TYPO3 >= 8
+
 ## AdditionalConfiguration.php example
 
 ```php

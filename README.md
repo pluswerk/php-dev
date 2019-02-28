@@ -67,7 +67,8 @@ See the [documentation] for more information.
 [documentation]: docs/index.md
 
 
-## Setup:
+## Setup
+
 
 Create a docker-compose.yml like the one from above.
 Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and maybe the Application Context.
