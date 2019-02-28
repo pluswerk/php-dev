@@ -1,0 +1,6 @@
+#!/bin/bash
+
+WEB_SERVER=$(echo $CACHE_TAG | cut -f1 -d-)
+PHP_VERSION=$(echo $CACHE_TAG | cut -f2 -d-)
+FROM_ARG="FROM=webdevops/php-$WEB_SERVER-dev:$PHP_VERSION"
+docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME  --build-arg $FROM_ARG .
