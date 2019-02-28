@@ -27,7 +27,11 @@ services:
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
+      # See for VIRTUAL_* in documentation: Nginx Reverse Proxy
       - VIRTUAL_HOST=~^docker-website-[a-z]+\.vm$$
+      #- VIRTUAL_PROTO=https
+      #- VIRTUAL_PORT=443
+
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
