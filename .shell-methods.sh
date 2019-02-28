@@ -14,6 +14,13 @@ function userColorUser {
     fi
 }
 
+# Render Git branch for PS1
+function renderGitBranch {
+    if [ -f $(which git) ]; then
+        echo -e "\e[0;33m$(__git_ps1)"
+    fi
+}
+
 # Style bash prompt
 function stylePS1 {
     VAR_HOSTNAME=`hostname`
@@ -21,8 +28,5 @@ function stylePS1 {
         VAR_HOSTNAME="${1}"
     fi;
 
-    PS1='$(userTerminalTitlePwd)\[\e[0;36m\][$(userColorUser)\u\[\e[0;36m\]@\[\e[1;34m\]${VAR_HOSTNAME}\[\e[0;36m\]: \[\e[0m\]\w\[\e[0;36m\]]\[\e[0;36m\]> $(userColorUser)\n\$\[\e[0m\] ';
-    if [ -f $(which git) ]; then
-        PS1='$(userTerminalTitlePwd)\[\e[0;36m\][$(userColorUser)\u\[\e[0;36m\]@\[\e[1;34m\]${VAR_HOSTNAME}\[\e[0;36m\]: \[\e[0m\]\w\[\e[0;36m\]]\[\e[0;33m\]$(__git_ps1)\[\e[0;36m\]> $(userColorUser)\n\$\[\e[0m\] ';
-    fi
+    PS1='$(userTerminalTitlePwd)\[\e[0;36m\][$(userColorUser)\u\[\e[0;36m\]@\[\e[1;34m\]${VAR_HOSTNAME}\[\e[0;36m\]: \[\e[0m\]\w\[\e[0;36m\]]$(renderGitBranch)\[\e[0;36m\]> $(userColorUser)\n\$\[\e[0m\] ';
 }
