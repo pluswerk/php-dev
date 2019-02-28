@@ -1,6 +1,11 @@
 #!/bin/bash
 
-WEB_SERVER=$(echo $CACHE_TAG | cut -f1 -d-)
-PHP_VERSION=$(echo $CACHE_TAG | cut -f2 -d-)
-FROM_ARG="FROM=webdevops/php-$WEB_SERVER-dev:$PHP_VERSION"
-docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME  --build-arg $FROM_ARG .
+if [ ! -z "${CACHE_TAG}" ]; then
+  WEB_SERVER=$(echo $CACHE_TAG | cut -f1 -d-)
+  PHP_VERSION=$(echo $CACHE_TAG | cut -f2 -d-)
+  FROM_ARG="--build-arg FROM=webdevops/php-$WEB_SERVER-dev:$PHP_VERSION"
+else
+  FROM_ARG=''
+fi
+
+docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME $FROM_ARG .
