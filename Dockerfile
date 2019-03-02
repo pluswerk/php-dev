@@ -1,4 +1,5 @@
-FROM webdevops/php-apache-dev:7.3
+ARG FROM=webdevops/php-apache-dev:7.3
+FROM $FROM
 
 RUN apt-get update && \
   apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
