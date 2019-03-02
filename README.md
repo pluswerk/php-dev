@@ -27,7 +27,7 @@ services:
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
-      # See for VIRTUAL_* in documentation: Nginx Reverse Proxy
+      # Take a look at VIRTUAL_* in the documentation under Nginx Reverse Proxy
       - VIRTUAL_HOST=~^docker-website-[a-z]+\.vm$$
       #- VIRTUAL_PROTO=https
       #- VIRTUAL_PORT=443
