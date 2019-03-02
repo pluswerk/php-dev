@@ -1,11 +1,21 @@
 #!/bin/bash
 
-if [ ! -z "${CACHE_TAG}" ]; then
+# if Docker Hub builds only for test, then $CACHE_TAG is empty.
+# the $CACHE_TAG decides wich FROM is will be used.
+printf "hooks/build: CACHE_TAG: %s\n" "$CACHE_TAG"
+printf "hooks/build: IMAGE_NAME: %s\n" "$IMAGE_NAME"
+printf "hooks/build: DOCKERFILE_PATH: %s\n" "$DOCKERFILE_PATH"
+
+FROM_ARG=''
+if [[ ! -z "${CACHE_TAG}" ]]; then
   WEB_SERVER=$(echo $CACHE_TAG | cut -f1 -d-)
+  printf "hooks/build: WEB_SERVER: %s\n" "$WEB_SERVER"
+
   PHP_VERSION=$(echo $CACHE_TAG | cut -f2 -d-)
+  printf "hooks/build: PHP_VERSION: %s\n" "$PHP_VERSION"
+
   FROM_ARG="--build-arg FROM=webdevops/php-$WEB_SERVER-dev:$PHP_VERSION"
-else
-  FROM_ARG=''
 fi
+printf "hooks/build: FROM_ARG: %s\n" "$FROM_ARG"
 
 docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME $FROM_ARG .
