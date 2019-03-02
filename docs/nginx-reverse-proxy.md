@@ -10,7 +10,7 @@ So that the nginx reverse proxy knows which domain belongs to which Docker conta
 
 ##### Variant A
 
-You can simply specify this domain directly without regular expressions. See variant A.
+You can specify this domain directly without regular expressions. See variant A.
 
 ##### Regular expression information
 
