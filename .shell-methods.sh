@@ -1,5 +1,23 @@
 #!/usr/bin/env bash
 
+COLOR_RESET=$(echo -en '\001\033[0m\002')
+COLOR_RED=$(echo -en '\001\033[00;31m\002')
+COLOR_GREEN=$(echo -en '\001\033[00;32m\002')
+COLOR_YELLOW=$(echo -en '\001\033[00;33m\002')
+COLOR_BLUE=$(echo -en '\001\033[00;34m\002')
+COLOR_MAGENTA=$(echo -en '\001\033[00;35m\002')
+COLOR_PURPLE=$(echo -en '\001\033[00;35m\002')
+COLOR_CYAN=$(echo -en '\001\033[00;36m\002')
+COLOR_LIGHTGRAY=$(echo -en '\001\033[00;37m\002')
+COLOR_LRED=$(echo -en '\001\033[01;31m\002')
+COLOR_LGREEN=$(echo -en '\001\033[01;32m\002')
+COLOR_LYELLOW=$(echo -en '\001\033[01;33m\002')
+COLOR_LBLUE=$(echo -en '\001\033[01;34m\002')
+COLOR_LMAGENTA=$(echo -en '\001\033[01;35m\002')
+COLOR_LPURPLE=$(echo -en '\001\033[01;35m\002')
+COLOR_LCYAN=$(echo -en '\001\033[01;36m\002')
+COLOR_WHITE=$(echo -en '\001\033[01;37m\002')
+
 # Set Terminal title - current folder
 function userTerminalTitlePwd {
     echo -e '\033]2;'$(pwd)'\007'
@@ -8,16 +26,16 @@ function userTerminalTitlePwd {
 # Set current user color
 function userColorUser {
     if [[ $EUID -eq 0 ]]; then
-        echo -e '\e[1;31m';
+        echo "${COLOR_LRED}";
     else
-        echo -e '\e[1;32m';
+        echo "${COLOR_LGREEN}";
     fi
 }
 
 # Render Git branch for PS1
 function renderGitBranch {
     if [ -f $(which git) ]; then
-        echo -e "\e[0;33m$(__git_ps1)"
+        echo "${COLOR_YELLOW}$(__git_ps1)"
     fi
 }
 
@@ -28,5 +46,5 @@ function stylePS1 {
         VAR_HOSTNAME="${1}"
     fi;
 
-    PS1='$(userTerminalTitlePwd)\[\e[0;36m\][$(userColorUser)\u\[\e[0;36m\]@\[\e[1;34m\]${VAR_HOSTNAME}\[\e[0;36m\]: \[\e[0m\]\w\[\e[0;36m\]]$(renderGitBranch)\[\e[0;36m\]> $(userColorUser)\n\$\[\e[0m\] ';
+    PS1='$(userTerminalTitlePwd)${COLOR_CYAN}[$(userColorUser)\u${COLOR_CYAN}@${COLOR_LBLUE}${VAR_HOSTNAME}${COLOR_CYAN}: ${COLOR_RESET}\w${COLOR_CYAN}]$(renderGitBranch)${COLOR_CYAN}> $(userColorUser)\n\$${COLOR_RESET} ';
 }
