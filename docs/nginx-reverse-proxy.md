@@ -6,7 +6,7 @@ Below is a clarification of the VIRTUAL_* variable.
 
 ## VIRTUAL_HOST: Virtual host (your domain)
 
-So that the nginx reverse proxy knows which domain belongs to which Docker container there is the VIRTUAL_HOST variable.
+Through the VIRTUAL_HOST variable the nginx reverse proxy knows which domain belongs to which Docker container.
 
 ##### Variant A
 
