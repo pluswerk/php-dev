@@ -1,6 +1,6 @@
 # Nginx Reverse Proxy
 
-As already mentioned, this project relies on [pluswerk/docker-global](https://github.com/pluswerk/docker-global).
+This project relies on [pluswerk/docker-global](https://github.com/pluswerk/docker-global).
 
 Here is an information about the VIRTUAL_* variable clarified.
 
