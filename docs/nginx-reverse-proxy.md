@@ -14,7 +14,7 @@ You can specify this domain directly without regular expressions. See variant A.
 
 ##### Regular expression information
 
-However, I would recommend a bit of regular expressions.
+We do recommend the use of regular expressions.
 
 The regular expression starts with a ~ and ends with a $$. So do not wonder why it's two dollars.
 
