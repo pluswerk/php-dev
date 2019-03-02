@@ -2,7 +2,7 @@
 
 This project relies on [pluswerk/docker-global](https://github.com/pluswerk/docker-global).
 
-Here is an information about the VIRTUAL_* variable clarified.
+Below is a clarification of the VIRTUAL_* variable.
 
 ## VIRTUAL_HOST: Virtual host (your domain)
 
