@@ -2,6 +2,28 @@
 
 This project relies on [pluswerk/docker-global](https://github.com/pluswerk/docker-global).
 
+File docker-compose.yml:
+
+```yaml
+services:
+  web:
+    environment:
+      # A: domain.vm
+      - VIRTUAL_HOST=domain.vm
+
+      # B: domain.vm, *.domain.vm, domain.vmd, *.domain.vmd
+      - VIRTUAL_HOST=~^(.+\.)?domain\.(vm|vmd)$$
+
+      # C: domain.vm, www.domain.vm, domain.vmd, www.domain.vmd
+      #- VIRTUAL_HOST=~^(www\.)?domain\.(vm|vmd)$$
+
+      # D: subdomain.domain.vm, subdomain.domain.vmd
+      #- VIRTUAL_HOST=~^subdomain\.domain\.(vm|vmd)$$
+
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+```
+
 Below is a clarification of the VIRTUAL_* variable.
 
 ## VIRTUAL_HOST: Virtual host (your domain)
@@ -43,23 +65,6 @@ But since every system is different, you can of course do what suits you.
 
 File docker-compose.yml:
 
-```yaml
-services:
-  web:
-    environment:
-      # A: domain.vm
-      - VIRTUAL_HOST=domain.vm
-
-      # B: domain.vm, *.domain.vm, domain.vmd, *.domain.vmd
-      - VIRTUAL_HOST=~^(.+\.)?domain\.(vm|vmd)$$
-
-      # C: domain.vm, www.domain.vm, domain.vmd, www.domain.vmd
-      #- VIRTUAL_HOST=~^(www\.)?domain\.(vm|vmd)$$
-
-      # D: subdomain.domain.vm, subdomain.domain.vmd
-      #- VIRTUAL_HOST=~^subdomain\.domain\.(vm|vmd)$$
-```
-
 ## VIRTUAL_PROTO & VIRTUAL_PORT: SSL
 
 Virtual protocol (VIRTUAL_PROTO) and virtual port (VIRTUAL_PORT) are only there to regulate the communication between nginx-reverse-proxy and the website.
@@ -86,14 +91,3 @@ That's why you have to set the virtual protocol to https and change the virtual 
 
 The communication between nginx-reverse-proxy and the website is now always via https.
 No matter if you surf from the web browser via http or https.
-
-
-File docker-compose.yml:
-
-```yaml
-services:
-  web:
-    environment:
-      - VIRTUAL_PROTO=https
-      - VIRTUAL_PORT=443
-```
