@@ -27,7 +27,8 @@ USER root
 ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
     PHP_DISMOD="ioncube" \
-    PHP_DISPLAY_ERRORS="1"
+    PHP_DISPLAY_ERRORS="1" \
+    PHP_MEMORY_LIMIT="-1"
 
 COPY entrypoint.d/* /entrypoint.d/
 
