@@ -31,4 +31,4 @@ function startFunction {
 }
 
 startFunction "${@:1}"
-        exit 0
+        exit $?
