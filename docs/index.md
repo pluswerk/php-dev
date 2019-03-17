@@ -8,6 +8,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 
 ## Other topics
 
+* [Nginx Reverse Proxy](nginx-reverse-proxy.md)
 * [TYPO3 configuration >=8](typo3-configuration.md)
 * [TYPO3 configuration <=7](typo3-configuration-legacy.md)
 * [Change docker project name](docker-project-name.md)
