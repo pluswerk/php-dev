@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sudo rm -f /usr/local/etc/php/conf.d/*blackfire.ini
+sudo bash -c 'echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini'
+sudo supervisorctl restart php-fpm:php-fpmd
