@@ -5,9 +5,9 @@ function startFunction {
   echo "running script ${key}"
   case ${key} in
      start)
-        startFunction pull
-        startFunction build
-        startFunction up
+        startFunction pull && \
+        startFunction build && \
+        startFunction up && \
         startFunction login
         return
         ;;
