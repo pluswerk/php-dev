@@ -46,5 +46,9 @@ function stylePS1 {
         VAR_HOSTNAME="${1}"
     fi;
 
-    PS1='$(userTerminalTitlePwd)${COLOR_CYAN}[$(userColorUser)\u${COLOR_CYAN}@${COLOR_LBLUE}${VAR_HOSTNAME}${COLOR_CYAN}: ${COLOR_RESET}\w${COLOR_CYAN}]$(renderGitBranch)${COLOR_CYAN}> $(userColorUser)\n\$${COLOR_RESET} ';
+    PS1='$(userTerminalTitlePwd)'
+    PS1+='${COLOR_CYAN}['
+    PS1+='$(userColorUser)\u${COLOR_CYAN}@${COLOR_LBLUE}${VAR_HOSTNAME}${COLOR_CYAN}: ${COLOR_RESET}\w'
+    PS1+='${COLOR_CYAN}]'
+    PS1+='$(renderGitBranch)${COLOR_CYAN}> $(userColorUser)\n\$${COLOR_RESET} ';
 }
