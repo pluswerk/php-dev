@@ -187,12 +187,12 @@ $(function() {
         <input type="hidden" name="C" value="<?php echo $c; ?>" />
 
         <select name="O" onchange="this.form.submit();">
-            <option value="A" <?php echo ($o === 'A' ? 'selected="selected"' : '' ); ?>> Aufsteigend</option>
-            <option value="D" <?php echo ($o == 'D' ? 'selected="selected"' : '' ); ?>> Absteigend</option>
+            <option value="A" <?php echo ($o === 'A' ? 'selected="selected"' : '' ); ?>> Ascending</option>
+            <option value="D" <?php echo ($o === 'D' ? 'selected="selected"' : '' ); ?>> Descending</option>
         </select>
         <select name="V" onchange="this.form.submit();">
-            <option value="0" <?php echo ($v == '0' ? 'selected="selected"' : '' ); ?>> Normal sortieren</option>
-            <option value="1" <?php echo ($v == '1' ? 'selected="selected"' : '' ); ?>> Version sortieren</option>
+            <option value="0" <?php echo ($v === '0' ? 'selected="selected"' : '' ); ?>> Sort normally</option>
+            <option value="1" <?php echo ($v === '1' ? 'selected="selected"' : '' ); ?>> Sort version</option>
         </select>
 
         <input type="text" name="P" value="<?php echo $p; ?>" placeholder="Filter: *search*" />
