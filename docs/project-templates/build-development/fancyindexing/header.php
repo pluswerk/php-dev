@@ -187,7 +187,7 @@ $(function() {
         <input type="hidden" name="C" value="<?php echo $c; ?>" />
 
         <select name="O" onchange="this.form.submit();">
-            <option value="A" <?php echo ($o == 'A' ? 'selected="selected"' : '' ); ?>> Aufsteigend</option>
+            <option value="A" <?php echo ($o === 'A' ? 'selected="selected"' : '' ); ?>> Aufsteigend</option>
             <option value="D" <?php echo ($o == 'D' ? 'selected="selected"' : '' ); ?>> Absteigend</option>
         </select>
         <select name="V" onchange="this.form.submit();">
