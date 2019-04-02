@@ -60,122 +60,122 @@ if (!in_array($c, ['M', 'S', 'D'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $fancyIndexing->getDirectoryTitle(); ?></title>
 
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-family: sans-serif, serif;
-    color: #000000;
-    background: #CCECFF;
-    font-size: 16px;
-}
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        font-family: sans-serif, serif;
+        color: #000000;
+        background: #CCECFF;
+        font-size: 16px;
+    }
 
-img {margin: 0; padding: 0; border: 0;}
+    img {margin: 0; padding: 0; border: 0;}
 
-table {
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #FFFFFF;
-    border: 2px solid #0099CC;
-    border-spacing: 0;
-    font-size: 16px;
-}
-tr:hover td {
-    background-color: #CCECFF;
-}
-tr:hover td:first-child {
-    border-radius: 5px 0 0 5px;
-}
-tr:hover td:last-child {
-    border-radius: 0 5px 5px 0;
-}
+    table {
+        margin: 20px auto;
+        padding: 10px;
+        background-color: #FFFFFF;
+        border: 2px solid #0099CC;
+        border-spacing: 0;
+        font-size: 16px;
+    }
+    tr:hover td {
+        background-color: #CCECFF;
+    }
+    tr:hover td:first-child {
+        border-radius: 5px 0 0 5px;
+    }
+    tr:hover td:last-child {
+        border-radius: 0 5px 5px 0;
+    }
 
-table tr td {
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
-}
-table tr td:nth-child(1) {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-table tr td:nth-child(2) {
-    padding-left: 0;
-}
-table tr td:nth-child(5) {
-}
+    table tr td {
+        padding-left: 10px;
+        padding-right: 10px;
+        vertical-align: middle;
+    }
+    table tr td:nth-child(1) {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    table tr td:nth-child(2) {
+        padding-left: 0;
+    }
+    table tr td:nth-child(5) {
+    }
 
-h1 {
-    margin-top: 20px;
-    text-align: center;
-}
-h1:before{content:"[ ";}
-h1:after{content:" ]";}
+    h1 {
+        margin-top: 20px;
+        text-align: center;
+    }
+    h1:before{content:"[ ";}
+    h1:after{content:" ]";}
 
-a {
-    text-decoration:none;
-    line-height:32px;
-    color: black;
-}
+    a {
+        text-decoration:none;
+        line-height:32px;
+        color: black;
+    }
 
-table th a {
-    padding: 5px;
-    border-radius: 5px;
-}
+    table th a {
+        padding: 5px;
+        border-radius: 5px;
+    }
 
-a:hover {
-    color: #000000;
-    background-color: #CCECFF;
-}
+    a:hover {
+        color: #000000;
+        background-color: #CCECFF;
+    }
 
-table td a {
-  display: block;
-}
+    table td a {
+        display: block;
+    }
 
-hr {
-    margin: 8px 0;
-    border: 0;
-    border-bottom: 1px solid #0099CC;
-}
-tr:last-child th hr {display: none;}
-input {
-    padding: 3px 5px;
-    border: 1px solid #0099CC;
-    border-radius: 4px;
-}
-select {
-    padding: 1px 3px;
-}
+    hr {
+        margin: 8px 0;
+        border: 0;
+        border-bottom: 1px solid #0099CC;
+    }
+    tr:last-child th hr {display: none;}
+    input {
+        padding: 3px 5px;
+        border: 1px solid #0099CC;
+        border-radius: 4px;
+    }
+    select {
+        padding: 1px 3px;
+    }
 
-<?php if ($fancyIndexing->isServerSoftwareNginx()) { ?>
-body {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-}
-table {
-    font-weight: normal;
-    text-align: left;
-}
-<?php } ?>
-</style>
-<script src="/.fancyindexing/jquery.min.js"></script>
-<script>
-$(function() {
-    $('#directory_title').html(document.title);
+    <?php if ($fancyIndexing->isServerSoftwareNginx()) { ?>
+    body {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+    }
+    table {
+        font-weight: normal;
+        text-align: left;
+    }
+    <?php } ?>
+    </style>
+    <script src="/.fancyindexing/jquery.min.js"></script>
+    <script>
+    $(function() {
+        $('#directory_title').html(document.title);
 
-    $('tr').each(function() {
-        if(typeof $('td a', this).attr('href') !== 'undefined') {
-            $(this).click(function() {
-                document.location.href = $('td a', this).attr('href');
-            });
-            $(this).css('cursor', 'pointer');
-        }
+        $('tr').each(function() {
+            if(typeof $('td a', this).attr('href') !== 'undefined') {
+                $(this).click(function() {
+                    document.location.href = $('td a', this).attr('href');
+                });
+                $(this).css('cursor', 'pointer');
+            }
+        });
     });
-});
-</script>
+    </script>
 </head>
 
 <body>
