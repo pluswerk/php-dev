@@ -31,7 +31,7 @@ Now you have little magic in the script.
 For example, you now have this folder structure:
 
 ```bash
-# test1.development.vm
+# test1.development.vm (only for nginx)
 ./test1/index.php
 
 # test2.development.vm/script.php
@@ -46,5 +46,7 @@ If you go to development.vm you will get a small file list.
 If you create a folder, a domain is automatically reachable: test1.development.vm
 
 If there is a subfolder "public" in the created folder, then the created domain will be accessible from there: test2.development.vm
+
+*Note: The subfolder "public" detection can until now only nginx.*
 
 In this sense, happy coding!
