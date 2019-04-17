@@ -20,9 +20,20 @@ xdebug-disable
 
 ## CLI: run any php script with this prefixed:
 ````
-XDEBUG_CONFIG="remote_enable=1" php #...
+PHP_IDE_CONFIG="serverName=Unnamed" XDEBUG_CONFIG="remote_enable=1" php #...
 ````
 
 ## WEB:
 
 We recomand usage of a enable disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.)
+
+
+### Listening for PHP Debug Sessions:
+
+If you want to use the "Start Listening for PHP Debug Connections" Button in PHPStorm, you can set these ENV variables:
+Where Unnamed is the name of the server config in PHPStorm.
+````
+    - php.xdebug.remote_enable=1
+    - php.xdebug.remote_autostart=1
+    - PHP_IDE_CONFIG=serverName=Unnamed
+````
