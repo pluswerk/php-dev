@@ -14,7 +14,7 @@ if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
 
 //    $vmNumber = getenv('VM_NUMBER');
-//    if (!\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($vmNumber)) {
+//    if (!preg_match('/\d+/', $vmNumber)) {
 //        throw new \Exception('env VM_NUMBER needed! it must be an int!');
 //    }
 //    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['xyz_search']['domainA'] = sprintf('project.de.vm%d.iveins.de', $vmNumber);
