@@ -15,9 +15,12 @@ RUN apt-get update && \
 RUN cd /tmp && wget https://github.com/tideways/php-xhprof-extension/archive/v${XPROF_VERSION}.zip && unzip v${XPROF_VERSION}.zip && ls && \
     cd php-xhprof-extension-${XPROF_VERSION} && phpize && ./configure && make && make install
 
+RUN echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini
+COPY profiler.php /opt/docker/profiler.php
+RUN echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini
+
 USER application
-RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
-RUN composer global require perftools/xhgui-collector
+RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector && composer clear
 
 # add .git-completion.bash
 RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash
@@ -32,10 +35,6 @@ COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 
 USER root
-
-RUN echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini
-COPY profiler.php /opt/docker/profiler.php
-RUN echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini
 
 ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
