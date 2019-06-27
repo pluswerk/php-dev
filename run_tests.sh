@@ -2,6 +2,9 @@
 
 # php should be callable
 php -v &&
+# php should have speficic modules installed
+php -m | grep xdebug || exit 1 &&
+php -m | grep tideways || exit 1 &&
 # sudo should be installed
 sudo echo 'done' &&
 # nano should be installed

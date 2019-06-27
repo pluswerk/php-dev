@@ -1,6 +1,9 @@
 ARG FROM=webdevops/php-apache-dev:7.3
 FROM $FROM
 
+ENV XPROF_VERSION=5.0-beta3
+
+# Install additional software
 RUN apt-get update && \
   apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
   usermod -aG sudo application && \
@@ -8,8 +11,13 @@ RUN apt-get update && \
   curl -fsSL https://get.docker.com/ | sh && \
   rm -rf /var/lib/apt/lists/*
 
+# Install XHProf
+RUN cd /tmp && wget https://github.com/tideways/php-xhprof-extension/archive/v${XPROF_VERSION}.zip && unzip v${XPROF_VERSION}.zip && ls && \
+    cd php-xhprof-extension-${XPROF_VERSION} && phpize && ./configure && make && make install
+
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff
+RUN composer global require perftools/xhgui-collector
 
 # add .git-completion.bash
 RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash
@@ -24,6 +32,10 @@ COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 
 USER root
+
+RUN echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini
+COPY profiler.php /opt/docker/profiler.php
+RUN echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini
 
 ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
