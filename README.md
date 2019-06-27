@@ -40,6 +40,7 @@ services:
       - PHP_DEBUGGER=${PHP_DEBUGGER:-none}
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID:-}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN:-}
+      - XHGUI_MONGO_URI=${XHGUI_MONGO_URI:-global-xhgui:27017}
 
       # Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
@@ -78,3 +79,11 @@ Create a docker-compose.yml like the one from above.
 Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and maybe the Application Context.
 
 Then you can copy the [start.sh](start.sh) into your Project and start it.
+
+## Profiling
+
+Enable profiling can be achieved through the following:
+- Setting `PROFILING_ENABLED` in your .env enables it for *every* request
+- Should you only want to debug a single website, you can set a cookie with the xdebug extension by enabling XDEBUG_PROFILE.
+
+That should flood your xhgui with requests.

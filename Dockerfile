@@ -20,8 +20,10 @@ COPY profiler.php /opt/docker/profiler.php
 RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
     echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; fi;
 
+RUN docker-php-ext-enable mongodb
+
 USER application
-RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector && composer clear
+RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && composer clear
 
 # add .git-completion.bash
 RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash
@@ -41,7 +43,9 @@ ENV \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
     PHP_DISMOD="ioncube" \
     PHP_DISPLAY_ERRORS="1" \
-    PHP_MEMORY_LIMIT="-1"
+    PHP_MEMORY_LIMIT="-1" \
+    XHGUI_MONGO_URI="global-xhgui:27017" \
+    XHGUI_PROFILING="enabled"
 
 COPY entrypoint.d/* /entrypoint.d/
 
