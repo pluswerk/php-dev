@@ -20,7 +20,7 @@ COPY profiler.php /opt/docker/profiler.php
 RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
     echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; fi;
 
-RUN docker-php-ext-enable mongodb
+RUN php -m | grep mongo || pecl install mongodb && docker-php-ext-enable mongodb
 
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && composer clear
