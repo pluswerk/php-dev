@@ -21,7 +21,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 
 ## Features
 * [XDebug](docs/xdebug.md) - how to debug your code
-* [Environmont Variables](docs/env-varaibles.md) - what can I configure
+* [Environment Variables](docs/env-varaibles.md) - what can I configure
 * [PHP Profiling](docs/profiling.md) - why is my code so slow/memory hungry
 
 ## Helpfull
