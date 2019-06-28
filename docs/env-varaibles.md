@@ -1,6 +1,6 @@
 # Env Variables
 
-The variables are for setting the configuration of the container. They can be set via the `docker-compose.yml`.
+These variables are for configuring the container. They can be set via the `docker-compose.yml`.
 
 **\* where**
  - d = docker
