@@ -6,6 +6,8 @@ printf "hooks/build: DOCKER_TAG: %s\n" "$DOCKER_TAG"
 printf "hooks/build: IMAGE_NAME: %s\n" "$IMAGE_NAME"
 printf "hooks/build: DOCKERFILE_PATH: %s\n" "$DOCKERFILE_PATH"
 
+DATE=$(date +%Y-%m-%d)
+
 FROM_ARG=''
 if [[ ! -z "${DOCKER_TAG}" ]] && [[ "$DOCKER_TAG" != 'this' ]]; then
   WEB_SERVER=$(echo $DOCKER_TAG | cut -f1 -d-)
@@ -18,4 +20,4 @@ if [[ ! -z "${DOCKER_TAG}" ]] && [[ "$DOCKER_TAG" != 'this' ]]; then
 fi
 printf "hooks/build: FROM_ARG: %s\n" "$FROM_ARG"
 
-docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME $FROM_ARG .
+docker build --cache-from $IMAGE_NAME -f $DOCKERFILE_PATH -t $IMAGE_NAME -t $IMAGE_NAME-$DATE $FROM_ARG .

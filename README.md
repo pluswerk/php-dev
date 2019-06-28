@@ -17,7 +17,7 @@ version: '3.5'
 
 services:
   web:
-    image: pluswerk/php-dev:nginx-7.2
+    image: pluswerk/php-dev:nginx-7.3
 
     volumes:
       - .:/app
@@ -50,7 +50,6 @@ services:
       # Don't forget to connect via ./start.sh
       - APPLICATION_UID=${APPLICATION_UID:-1000}
       - APPLICATION_GID=${APPLICATION_GID:-1000}
-    working_dir: /app
 
   node:
     image: node:lts
@@ -82,8 +81,10 @@ Then you can copy the [start.sh](start.sh) into your Project and start it.
 
 ## Profiling
 
+``Profiling only works in php >= 7.0``
+
 Enable profiling can be achieved through the following:
 - Setting `PROFILING_ENABLED` in your .env enables it for *every* request
-- Should you only want to debug a single website, you can set a cookie with the xdebug extension by enabling XDEBUG_PROFILE.
+- Should you only want to debug a single website, you can set a cookie with the [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.) by enabling XDEBUG_PROFILE.
 
 That should flood your xhgui with requests.

@@ -1,4 +1,4 @@
-ARG FROM=webdevops/php-apache-dev:7.3
+ARG FROM=webdevops/php-nginx-dev:7.3
 FROM $FROM
 
 ENV XPROF_VERSION=5.0-beta3
@@ -12,18 +12,26 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 # Install XHProf
-RUN echo $(php -r "echo PHP_VERSION_ID;");
-RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then cd /tmp && wget https://github.com/tideways/php-xhprof-extension/archive/v${XPROF_VERSION}.zip && unzip v${XPROF_VERSION}.zip && ls && \
-                                                                cd php-xhprof-extension-${XPROF_VERSION} && phpize && ./configure && make && make install; else echo 'do not install xhprof'; fi;
-
 COPY profiler.php /opt/docker/profiler.php
-RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
-    echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; fi;
 
-RUN php -m | grep mongo || pecl install mongodb && docker-php-ext-enable mongodb
+RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then \
+    cd /tmp && \
+      wget https://github.com/tideways/php-xhprof-extension/archive/v${XPROF_VERSION}.zip && \
+      unzip v${XPROF_VERSION}.zip && \
+      cd php-xhprof-extension-${XPROF_VERSION} && \
+      phpize && \
+      ./configure && \
+      make && \
+      make install && \
+    cd / && \
+      rm -rf /tmp/php-xhprof-extension-${XPROF_VERSION} && \
+      echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
+      echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; \
+  else echo 'do not install xhprof'; fi;
 
 USER application
-RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && composer clear
+RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
+    composer clear
 
 # add .git-completion.bash
 RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash
@@ -33,7 +41,9 @@ RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{
 # add .additional_bashrc.sh
 COPY bin/* /usr/local/bin/
 COPY .additional_bashrc.sh /home/application/.additional_bashrc.sh
+COPY .additional_bashrc.sh /home/root/.additional_bashrc.sh
 COPY .vimrc /home/application/.vimrc
+COPY .vimrc /home/root/.vimrc
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 
@@ -56,3 +66,5 @@ RUN if [ -f /etc/apache2/envvars ]; then sed -i 's/export APACHE_RUN_GROUP=www-d
 RUN if [ -f /etc/nginx/nginx.conf ]; then sed -i 's/user www-data;/user application application;/g' /etc/nginx/nginx.conf ; fi
 
 COPY run_tests.sh /tmp/run_tests.sh
+
+WORKDIR /app

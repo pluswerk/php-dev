@@ -4,7 +4,7 @@
 php -v &&
 # php should have speficic modules installed
 php -m | grep xdebug || exit 1 &&
-php -m | grep tideways || exit 1 &&
+[ 70000 -le $(php -r "echo PHP_VERSION_ID;") ] || php -m | grep tideways || exit 1 &&
 # sudo should be installed
 sudo echo 'done' &&
 # nano should be installed
