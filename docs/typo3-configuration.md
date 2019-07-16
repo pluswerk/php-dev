@@ -12,6 +12,7 @@ if ($_SERVER['TYPO3_CONTEXT'] === 'Development/docker') {
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'] = getenv('typo3DatabaseUsername') ?: 'root';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'] = getenv('typo3DatabasePassword') ?: 'root';
     $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'] = getenv('typo3DatabaseName') ?: 'default_database';
+
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = '.*';
     $_SERVER['HTTPS'] = $_SERVER['HTTP_X_FORWARDED_SSL'] ? $_SERVER['HTTP_X_FORWARDED_SSL'] : ($_SERVER['HTTPS'] ? $_SERVER['HTTPS'] : 'off');
 
