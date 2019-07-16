@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+#disable xhprof
+sudo sed -i 's,^auto_prepend_file = /opt/docker/profiler.php,#auto_prepend_file = /opt/docker/profiler.php,' /opt/docker/etc/php/php.ini
+#disable blackfire
 sudo rm -f /usr/local/etc/php/conf.d/*blackfire.ini
+#enable xdebug
 sudo bash -c 'echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini'
 sudo supervisorctl restart php-fpm:php-fpmd
