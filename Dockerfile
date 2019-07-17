@@ -59,8 +59,8 @@ ENV \
 COPY entrypoint.d/* /entrypoint.d/
 
 # install dependencies and phpspy
-RUN echo "deb http://ftp.de.debian.org/debian stretch-backports main" >> /etc/apt/sources.list && apt-get update && apt-get install -y libtermbox-dev
-RUN mkdir /opt/phpspy && cd /opt/phpspy && git clone https://github.com/adsr/phpspy.git . &&  make && make phpspy_dynamic && ln phpspy /usr/local/bin/phpspy
+RUN echo "deb http://ftp.de.debian.org/debian stretch-backports main" >> /etc/apt/sources.list && apt-get update && apt-get install -y libtermbox-dev && \
+ mkdir /opt/phpspy && cd /opt/phpspy && git clone https://github.com/adsr/phpspy.git . &&  make && make phpspy_dynamic && ln phpspy /usr/local/bin/phpspy
 
 # set apache user group to application:
 RUN if [ -f /etc/apache2/envvars ]; then sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=application/g' /etc/apache2/envvars ; fi
