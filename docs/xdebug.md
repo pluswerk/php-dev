@@ -2,7 +2,6 @@
 
 You can set the default value for the PHP_DEBUGGER in your `.env` file:
 ````env
-PHP_DEBUGGER=xdebug
 XDEBUG_REMOTE_HOST=10.50.1.223
 ````
 
@@ -18,7 +17,7 @@ hint: if `PHP_DEBUGGER` is set to `xdebug`, then the xh-profiler won't profile a
 xdebug-enable
 # disable xdebug and restarts fpm (hint: this also enables the xh-profiler)
 xdebug-disable
-# the following alias toggles xdebug
+# the following alias toggles xdebug and xh-profiler
 xdt
 ````
 
