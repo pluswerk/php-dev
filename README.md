@@ -84,3 +84,8 @@ networks:
     external:
       name: global
 ```
+
+## Testing this Container
+
+- running start.sh test does execute the test-scripts
+- running start.sh start does start a php-dev container and logs in automatically
