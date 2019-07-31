@@ -1,7 +1,7 @@
 # php-dev
 
-PHP-DEV is a small package that includes a web server, PHP and some tools needed to develop a web page.
-You can easily decide with a docker-compose.yml which PHP version you want and if you want to start an Apache or a Nginx webserver.
+PHP-DEV is a small package that includes a web server, PHP and some tools needed to develop a web application.
+You can easily decide with a docker-compose.yml which PHP version you want and whether you want to start an Apache or a Nginx webserver.
 We recommend to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects since this Dockerfile has been build by keeping that in mind.
 
 ## Setup
@@ -13,7 +13,7 @@ Then you can copy the [start.sh](start.sh) into your Project and start it.
 
 # Documentation
 
-The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-dev] respectivly. ([github])
+The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-dev] respectively. ([github])
 
 [webdevops/php-apache-dev]: https://hub.docker.com/r/webdevops/php-apache-dev
 [webdevops/php-nginx-dev]: https://hub.docker.com/r/webdevops/php-nginx-dev
@@ -21,10 +21,10 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 
 ## Features
 * [XDebug](docs/xdebug.md) - how to debug your code
-* [Environment Variables](docs/env-varaibles.md) - what can I configure
+* [Environment Variables](docs/env-variables.md) - what can I configure
 * [PHP Profiling](docs/profiling.md) - why is my code so slow/memory hungry
 
-## Helpfull
+## Helpful Information
 * [Change docker project name](docs/docker-project-name.md) - all my projects are in folders named the same
 * [Nginx Reverse Proxy](docs/nginx-reverse-proxy.md) - VIRTUAL_HOST explanation
 * [TYPO3 configuration >=8](docs/typo3-configuration.md) - AdditionalConfiguration.php
@@ -48,27 +48,27 @@ services:
 
     volumes:
       - .:/app
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro # this is optional if no node container is needed
       - ~/.ssh:/home/application/.ssh
       - ~/.composer/cache:/home/application/.composer/cache
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
-      # Take a look at VIRTUAL_* in the documentation under Nginx Reverse Proxy
+#     Take a look at VIRTUAL_* in the documentation under Nginx Reverse Proxy
       - VIRTUAL_HOST=docker-website.${TLD_DOMAIN:-docker},sub.docker-website.${TLD_DOMAIN:-docker}
-#      - HTTPS_METHOD=noredirect
+#     - HTTPS_METHOD=noredirect
 
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
       - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
 
-      # Project Env vars (enable what you need)
+#      Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
 #      - PIMCORE_ENVIRONMENT=development_docker
 #      - TYPO3_CONTEXT=Development/docker
 
-      # Don't forget to connect via ./start.sh
+#      Don't forget to connect via ./start.sh
       - APPLICATION_UID=${APPLICATION_UID:-1000}
       - APPLICATION_GID=${APPLICATION_GID:-1000}
 
@@ -84,3 +84,14 @@ networks:
     external:
       name: global
 ```
+
+### Tested with
+
+This project is a basic php-installation and should be able to run most applications.
+Nonetheless has this tool successfully been tested/used with:
+- TYPO3 >=7
+- PIMCore >= 5.4
+- Standalone PHP (Symfony, Laravel/Lumen, Vanilla) Projects
+- WordPress >= 4.5
+
+If you find any bug, don't hesitate to file an issue and/or pull request
