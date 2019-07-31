@@ -2,7 +2,7 @@
 
 # php should be callable
 php -v &&
-# php should have speficic modules installed
+# php should have specific modules installed
 xdebug-enable && php -m | grep xdebug || exit 1 &&
 [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ] || php -m | grep tideways || exit 1 &&
 # sudo should be installed
