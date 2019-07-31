@@ -12,19 +12,23 @@ function startFunction {
         return
         ;;
      up)
-        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose up -d
+        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.php.yml up -d
+        return
+        ;;
+     test)
+        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.test.yml up --build
         return
         ;;
      down)
-        docker-compose down --remove-orphans
+        docker-compose -f docker-compose.php.yml down --remove-orphans
         return
         ;;
      login)
-        docker-compose exec -u $(id -u):$(id -g) web bash
+        docker-compose -f docker-compose.php.yml exec -u $(id -u):$(id -g) php-dev bash
         return
         ;;
      *)
-        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose "${@:1}"
+        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.php.yml "${@:1}"
         return
         ;;
   esac

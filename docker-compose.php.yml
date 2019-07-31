@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  php-dev:
+    build: .
+    environment:
+      - VIRTUAL_HOST=test2.vm36.iveins.de
+      - XHGUI_MONGO_URI=global-xhgui:27017
+      - XHGUI_PROFILING=enabled
+      - PHP_DEBUGGER=xdebug
+    networks:
+      - global
+    volumes:
+      - ./src:/app/
+
+networks:
+  global:
+    external:
+      name: global
