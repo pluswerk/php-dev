@@ -13,7 +13,7 @@ hint: if `PHP_DEBUGGER` is set to `xdebug`, then the xh-profiler won't profile a
 ## enable and disable xdebug in running container:
 
 ````bash
-# enables xdebug and restarts fpm (hint: this also enables the xh-profiler)
+# enables xdebug and restarts fpm (hint: this also disables the xh-profiler)
 xdebug-enable
 # disable xdebug and restarts fpm (hint: this also enables the xh-profiler)
 xdebug-disable
