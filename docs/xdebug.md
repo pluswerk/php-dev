@@ -1,19 +1,24 @@
 # Xdebug
 
-You can set the default value for the PHP_DEBUGGER int your `.env` file:
+You can set the default value for the PHP_DEBUGGER in your `.env` file:
 ````env
-PHP_DEBUGGER=xdebug
 XDEBUG_REMOTE_HOST=10.50.1.223
 ````
-Where `XDEBUG_REMOTE_HOST` is the ip of your IDE.
+
+`XDEBUG_REMOTE_HOST` is the ip-address of your IDE <br />
+Information on how to set up xdebug with PHPStorm is here: [Creating a PHP Debug Server](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html)
+
+hint: if `PHP_DEBUGGER` is set to `xdebug`, then the xh-profiler won't profile anything 
 
 ## enable and disable xdebug in running container:
 
 ````bash
-# enables xdebug and restarts fpm
+# enables xdebug and restarts fpm (hint: this also disables the xh-profiler)
 xdebug-enable
-# disable xdebug and restarts fpm
+# disable xdebug and restarts fpm (hint: this also enables the xh-profiler)
 xdebug-disable
+# the following alias toggles xdebug and xh-profiler
+xdt
 ````
 
 # With xdebug enabled you need to activate xdebug on script run.
@@ -25,8 +30,8 @@ PHP_IDE_CONFIG="serverName=Unnamed" XDEBUG_CONFIG="remote_enable=1" php #...
 
 ## WEB:
 
-We recomand usage of a enable disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.)
-
+We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.)
+<br />hint: using the xdebug-helper also works for the xh-profiler, see [PHP Profiling](profiling.md) for more information
 
 ### Listening for PHP Debug Sessions:
 
