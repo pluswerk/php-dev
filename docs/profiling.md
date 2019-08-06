@@ -9,7 +9,7 @@ Profiling is active by default. The recording can be triggered in to different w
   
 That should flood your xhgui with requests.
 
-hint: if `PHP_DEBUGGER` is set to `xdebug`, then the xh-profiler won't profile anything 
+hint: if `PHP_DEBUGGER` is set to `xdebug` or xdebug was enabled through xdebug-enable, then the xh-profiler won't profile anything 
 
 ## Screenshots
 
