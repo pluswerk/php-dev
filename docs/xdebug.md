@@ -18,7 +18,7 @@ xdebug-enable
 # disable xdebug and restarts fpm (hint: this also enables the xh-profiler)
 xdebug-disable
 # the following alias toggles xdebug and xh-profiler
-xdt
+xdebug-toggle
 ````
 
 # With xdebug enabled you need to activate xdebug on script run.

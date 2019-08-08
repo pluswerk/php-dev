@@ -10,5 +10,5 @@
 | node_root_exec       | execute a command as root in the node container                                                                 |
 | xdebug-enable        | enables xdebug and disables therefore profiling                                                                 |
 | xdebug-disable       | disables xdebug and enables therefore profiling                                                                 |
-| xdt                  | Alias for `xdebug-enable` and `xdebug-disable` : toggles in either direction                                    |
+| xdebug-toggle        | Alias for `xdebug-enable` and `xdebug-disable` : toggles in either direction                                    |
 | ll                   | Alias for `ls -alh                                                                                              |
