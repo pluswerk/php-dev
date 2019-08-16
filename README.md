@@ -70,8 +70,9 @@ services:
 #      - TYPO3_CONTEXT=Development/docker
 
 #      Don't forget to connect via ./start.sh
-      - APPLICATION_UID=${APPLICATION_UID:-1000}
-      - APPLICATION_GID=${APPLICATION_GID:-1000}
+#      The Application Ids are optional and will be set automatically through the start.sh
+#      - APPLICATION_UID=${APPLICATION_UID:-1000}
+#      - APPLICATION_GID=${APPLICATION_GID:-1000}
 
   node:
     image: node:lts
