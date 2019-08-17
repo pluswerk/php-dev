@@ -1,5 +1,9 @@
 #!/bin/bash
 
+. .env
+
+USER=${APPLICATION_UID:-1000}:${APPLICATION_GID:-1000}
+
 function startFunction {
   key="$1"
   echo "running script ${key}"
@@ -12,11 +16,11 @@ function startFunction {
         return
         ;;
      up)
-        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.php.yml up -d
+        docker-compose -f docker-compose.php.yml up -d
         return
         ;;
      test)
-        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.test.yml up --build
+        docker-compose -f docker-compose.test.yml up --build
         return
         ;;
      down)
@@ -28,7 +32,7 @@ function startFunction {
         return
         ;;
      *)
-        APPLICATION_UID=$(id -u) APPLICATION_GID=$(id -g) docker-compose -f docker-compose.php.yml "${@:1}"
+        docker-compose -f docker-compose.php.yml "${@:1}"
         return
         ;;
   esac

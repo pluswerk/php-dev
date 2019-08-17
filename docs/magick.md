@@ -3,7 +3,7 @@
 If you need ImageMagick or GraphicMagick as a PHP module, you need to install and activate it.
 You can create your own Dockerfile and derive from this image.
 
-Both are already preinstalled in the Docker image and it is recommended that you use these binarys instead of the PHP module.
+Both are already preinstalled in the Docker image and it is recommended that you use these binaries instead of the PHP module.
 
 For Example:
 
