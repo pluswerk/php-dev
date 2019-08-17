@@ -1,15 +1,18 @@
-ARG FROM=webdevops/php-nginx-dev:7.3
+ARG FROM=webdevops/php-nginx-dev:7.4
 FROM $FROM
 
 ENV XPROF_VERSION=5.0-beta3
 
 # Install additional software
 RUN apt-get update && \
-  apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
+  apt-get install -y sudo vim nano less tree bash-completion iputils-ping && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-  curl -fsSL https://get.docker.com/ | sh && \
-  rm -rf /var/lib/apt/lists/*
+  curl -fsSL https://get.docker.com/ | sh
+
+RUN if [ 74000 -ge $(php -r "echo PHP_VERSION_ID;") ]; then apt-get install -y mariadb-client; \
+    else apt-get install -y mysql-client; fi && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install XHProf
 COPY profiler.php /opt/docker/profiler.php
