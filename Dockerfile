@@ -5,7 +5,7 @@ ENV XPROF_VERSION=5.0-beta3
 
 # Install additional software
 RUN apt-get update && \
-  apt-get install -y sudo vim nano less tree bash-completion mysql-client iputils-ping && \
+  apt-get install -y sudo vim nano less tree bash-completion mariadb-client iputils-ping && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
   curl -fsSL https://get.docker.com/ | sh && \
