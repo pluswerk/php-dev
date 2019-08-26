@@ -12,12 +12,13 @@ if sudo docker ps -q &>/dev/null; then
   export HOST_DISPLAY_NAME=$(sudo docker inspect ${CONTAINER_ID} --format='{{.Name}}')
   export HOST_DISPLAY_NAME=${HOST_DISPLAY_NAME:1}
 
-  alias node='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} node'
-  alias npm='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} npm'
-  alias npx='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} npx'
-  alias yarn='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} yarn'
   alias node_exec='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER}'
   alias node_root_exec='sudo docker exec -w $(pwd) -it ${NODE_CONTAINER}'
+
+  alias node='node_exec node'
+  alias npm='node_exec npm'
+  alias npx='node_exec npx'
+  alias yarn='node_exec yarn'
 fi;
 
 if [[ $CONTAINER_ID != ${HOSTNAME}* ]] ; then
