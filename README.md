@@ -30,6 +30,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 * [TYPO3 configuration >=8](docs/typo3-configuration.md) - AdditionalConfiguration.php
 * [TYPO3 configuration <=7](docs/typo3-configuration-legacy.md) - AdditionalConfiguration.php
 * [ImageMagick or GraphicMagick](docs/magick.md) - using php module
+* [Fix special user permissions](fix-special-user-permissions.md)
 
 ## Docker compose
 
@@ -69,9 +70,9 @@ services:
 #      - PIMCORE_ENVIRONMENT=development_docker
 #      - TYPO3_CONTEXT=Development/docker
 
-#      Don't forget to connect via ./start.sh
-      - APPLICATION_UID=${APPLICATION_UID:-1000}
-      - APPLICATION_GID=${APPLICATION_GID:-1000}
+#     Fix special user permissions (only if user id not 1000)
+      - APPLICATION_UID_OVERRIDE=${APPLICATION_UID_OVERRIDE:-1000}
+      - APPLICATION_GID_OVERRIDE=${APPLICATION_GID_OVERRIDE:-1000}
 
   node:
     image: node:lts

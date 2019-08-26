@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# Fix special user permissions
+APPLICATION_UID_OVERRIDE=${APPLICATION_UID_OVERRIDE:-1000}
+APPLICATION_GID_OVERRIDE=${APPLICATION_GID_OVERRIDE:-1000}
+APPLICATION_USER_OVERRIDE=${APPLICATION_USER_OVERRIDE:-app}
+APPLICATION_GROUP_OVERRIDE=${APPLICATION_USER_OVERRIDE:-app}
+
+if [ "$APPLICATION_UID_OVERRIDE" != "1000" ]; then
+    # Add group
+    groupadd -g "$APPLICATION_GID_OVERRIDE" "$APPLICATION_GROUP_OVERRIDE"
+
+    # Add user
+    useradd -u "$APPLICATION_UID_OVERRIDE" --home "/home/$APPLICATION_USER_OVERRIDE" --create-home --shell /bin/bash --no-user-group "$APPLICATION_USER_OVERRIDE"
+
+    # Assign user to group
+    usermod -g "$APPLICATION_GROUP_OVERRIDE" "$APPLICATION_USER_OVERRIDE"
+    usermod -aG sudo "$APPLICATION_USER_OVERRIDE"
+
+    # Set passwords to "dev"
+    echo "$APPLICATION_USER_OVERRIDE":"dev" | chpasswd
+
+    rsync -a /home/application/ /home/$APPLICATION_USER_OVERRIDE/
+    chown -R "$APPLICATION_USER_OVERRIDE":"$APPLICATION_GROUP_OVERRIDE" /home/$APPLICATION_USER_OVERRIDE
+fi
