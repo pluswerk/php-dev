@@ -41,6 +41,7 @@ RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{
 # add .additional_bashrc.sh
 COPY bin/* /usr/local/bin/
 COPY .additional_bashrc.sh /home/application/.additional_bashrc.sh
+COPY audit.sh /home/application/audit.sh
 COPY .vimrc /home/application/.vimrc
 COPY .vimrc /home/root/.vimrc
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf

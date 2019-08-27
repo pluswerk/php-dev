@@ -30,6 +30,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 * [TYPO3 configuration >=8](docs/typo3-configuration.md) - AdditionalConfiguration.php
 * [TYPO3 configuration <=7](docs/typo3-configuration-legacy.md) - AdditionalConfiguration.php
 * [ImageMagick or GraphicMagick](docs/magick.md) - using php module
+* [Vulnerabilities](docs/vulnerabilities.md)
 
 ## Docker compose
 
