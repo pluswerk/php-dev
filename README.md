@@ -1,15 +1,15 @@
 # php-dev
 
 PHP-DEV is a small package that includes a web server, PHP and some tools needed to develop a web application.
-You can easily decide with a docker-compose.yml which PHP version you want and whether you want to start an Apache or a Nginx webserver.
-We recommend to use [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects since this Dockerfile has been build by keeping that in mind.
+You can easily decide which version of PHP you want to use and whether you want to start an Apache or a Nginx webserver by setting the values in a docker-compose.yml.
+We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects, since this Dockerfile has been built keeping that in mind.
 
 ## Setup
 
-Create a docker-compose.yml like the one from down below.  
-Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and maybe the Application Context.
+Create a docker-compose.yml like shown below.  
+Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and optionally the Application Context.
 
-Then you can copy the [start.sh](start.sh) into your Project and start it.
+Then you can copy the [start.sh](start.sh) into your project and start it.
 
 # Documentation
 
@@ -95,4 +95,4 @@ Nonetheless has this tool successfully been tested/used with:
 - Standalone PHP (Symfony, Laravel/Lumen, Vanilla) Projects
 - WordPress >= 4.5
 
-If you find any bug, don't hesitate to file an issue and/or pull request
+If you find any bug, don't hesitate to file an issue and/or pull request.
