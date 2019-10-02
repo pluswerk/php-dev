@@ -54,7 +54,15 @@ ENV \
     PHP_DISPLAY_ERRORS="1" \
     PHP_MEMORY_LIMIT="-1" \
     XHGUI_MONGO_URI="global-xhgui:27017" \
-    XHGUI_PROFILING="enabled"
+    XHGUI_PROFILING="enabled" \
+    TZ=Europe/Berlin \
+    PHP_DATE_TIMEZONE=${TZ} \
+    SET_CONTAINER_TIMEZONE=true \
+    CONTAINER_TIMEZONE=${TZ}
+
+RUN echo ${TZ} >/etc/timezone && \
+    ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 COPY entrypoint.d/* /entrypoint.d/
 

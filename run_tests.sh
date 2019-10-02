@@ -25,6 +25,9 @@ ping -V &&
 # docker should be installed
 docker --version &&
 # composer should be installed
-composer --version
+composer --version &&
+# timezone should be berlin
+cat /etc/timezone && 
+test $(cat /etc/timezone) = "Europe/Berlin" || exit 1 &&
 
 exit $?
