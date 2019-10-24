@@ -29,7 +29,7 @@ RUN apt install -y graphicsmagick gcc libgraphicsmagick1-dev && \
     if [ "${PHP_VERSION}" = "1" ]; then printf "\n" | pecl install gmagick-1.1.7RC3; else printf "\n" | pecl install gmagick-2.0.5RC1; fi;
 ```
 
-For whatever reason, you can only activate one of them in PHP. If you activate both, PHP will not work properly anymore.
+Because of apparently too similar [symbols](https://bugs.php.net/bug.php?id=59285), you can only activate one of them in PHP. If you activate both, PHP will not work properly anymore.
 Therefore either use ImageMagick or GraphicMagick:
 
 ```dockerfile
