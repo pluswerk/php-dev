@@ -87,7 +87,7 @@ networks:
 ```
 
 **Hint for the example above:**
-In your own configuration you might want to repalce docker-website with your project name, e.g typo3.
+In your own configuration you might want to replace docker-website with your project name, e.g typo3.
 TLD_DOMAIN is an environment variable, your nginx container listens on for incoming requests. e.g. example.com.
 Your project will then be reachable by going to this domain: typo3.example.com
 
