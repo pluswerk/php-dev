@@ -6,8 +6,9 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
 
 ## Setup
 
-Create a docker-compose.yml like shown below.  
+Create a `compose/Development/docker-compose.yml` like shown below.  
 Change all your settings. Mainly the `VIRTUAL_HOST`, `WEB_DOCUMENT_ROOT` and optionally the Application Context.
+The Environment Variable `CONTEXT` is used to switch between different docker-compose.yml files.
 
 Then you can copy the [start.sh](start.sh) into your project and start it.
 
@@ -35,9 +36,9 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 
 This is an example of a docker-compose.yml file.
 It is enough to put this file into the project, configure it and start the Docker Project.
-Further information can be found in the [Documentation].
+Further information can be found in the Documentation.
 
-Example file: docker-compose.yml
+Example file: compose/Development/docker-compose.yml
 
 ```yaml
 version: '3.5'
