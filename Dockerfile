@@ -1,4 +1,4 @@
-ARG FROM=webdevops/php-nginx-dev:7.3
+ARG FROM=webdevops/php-nginx-dev:7.4
 FROM $FROM
 
 ENV XHPROF_VERSION=5.0.1
