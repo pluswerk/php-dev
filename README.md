@@ -45,7 +45,7 @@ version: '3.5'
 
 services:
   web:
-    image: pluswerk/php-dev:nginx-7.3
+    image: pluswerk/php-dev:nginx-7.4
 
     volumes:
       - .:/app
