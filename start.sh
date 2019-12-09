@@ -11,7 +11,6 @@ USER=${APPLICATION_UID:-1000}:${APPLICATION_GID:-1000}
 
 function startFunction {
   key="$1"
-  echo "running script ${key}"
   case ${key} in
      start)
         startFunction pull && \
