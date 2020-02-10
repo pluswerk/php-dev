@@ -26,6 +26,7 @@ The base Docker Images are [webdevops/php-apache-dev] and [webdevops/php-nginx-d
 * [PHP Profiling](docs/profiling.md) - why is my code so slow/memory hungry
 
 ## Helpful Information
+* [Code Coverage](docs/code-coverage.md) - I want to test my code with code coverage (phpunit, infection)
 * [Change docker project name](docs/docker-project-name.md) - all my projects are in folders named the same
 * [Nginx Reverse Proxy](docs/nginx-reverse-proxy.md) - VIRTUAL_HOST explanation
 * [TYPO3 configuration >=8](docs/typo3-configuration.md) - AdditionalConfiguration.php
