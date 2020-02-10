@@ -27,7 +27,8 @@ docker --version &&
 # composer should be installed
 composer --version &&
 # timezone should be berlin
-cat /etc/timezone && 
+cat /etc/timezone &&
 test $(cat /etc/timezone) = "Europe/Berlin" || exit 1 &&
+test $(php -r 'echo date_default_timezone_get();') = "Europe/Berlin" || exit 1 &&
 
 exit $?
