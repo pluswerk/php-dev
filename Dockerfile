@@ -1,7 +1,7 @@
-ARG FROM=webdevops/php-nginx-dev:7.3
+ARG FROM=webdevops/php-nginx-dev:7.4
 FROM $FROM
 
-ENV XPROF_VERSION=5.0-beta3
+ENV XHPROF_VERSION=5.0.1
 
 # Install additional software
 RUN apt-get update && \
@@ -16,15 +16,15 @@ COPY profiler.php /opt/docker/profiler.php
 
 RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then \
     cd /tmp && \
-      wget https://github.com/tideways/php-xhprof-extension/archive/v${XPROF_VERSION}.zip && \
-      unzip v${XPROF_VERSION}.zip && \
-      cd php-xhprof-extension-${XPROF_VERSION} && \
+      wget https://github.com/tideways/php-xhprof-extension/archive/v${XHPROF_VERSION}.zip && \
+      unzip v${XHPROF_VERSION}.zip && \
+      cd php-xhprof-extension-${XHPROF_VERSION} && \
       phpize && \
       ./configure && \
       make && \
       make install && \
     cd / && \
-      rm -rf /tmp/php-xhprof-extension-${XPROF_VERSION} && \
+      rm -rf /tmp/php-xhprof-extension-${XHPROF_VERSION} && \
       echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
       echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; \
   else echo 'do not install xhprof'; fi;
