@@ -57,8 +57,6 @@ ENV \
     XHGUI_PROFILING="enabled" \
     TZ=Europe/Berlin \
     PHP_DATE_TIMEZONE=${TZ} \
-    SET_CONTAINER_TIMEZONE=true \
-    CONTAINER_TIMEZONE=${TZ}
 
 RUN echo ${TZ} >/etc/timezone && \
     ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime && \
