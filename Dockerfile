@@ -1,7 +1,7 @@
 ARG FROM=webdevops/php-nginx-dev:7.4
 FROM $FROM
 
-ENV XHPROF_VERSION=5.0.1
+ENV XHPROF_VERSION=5.0.2
 
 # Install additional software
 RUN apt-get update && \
@@ -14,8 +14,7 @@ RUN apt-get update && \
 # Install XHProf
 COPY profiler.php /opt/docker/profiler.php
 
-RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then \
-    cd /tmp && \
+RUN cd /tmp && \
       wget https://github.com/tideways/php-xhprof-extension/archive/v${XHPROF_VERSION}.zip && \
       unzip v${XHPROF_VERSION}.zip && \
       cd php-xhprof-extension-${XHPROF_VERSION} && \
@@ -26,8 +25,12 @@ RUN if [ 70000 -le $(php -r "echo PHP_VERSION_ID;") ]; then \
     cd / && \
       rm -rf /tmp/php-xhprof-extension-${XHPROF_VERSION} && \
       echo "extension=tideways_xhprof.so" >> /opt/docker/etc/php/php.ini && \
-      echo "auto_prepend_file = /opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini; \
-  else echo 'do not install xhprof'; fi;
+      echo "auto_prepend_file=/opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini
+
+RUN pecl install pcov && \
+   docker-php-ext-enable pcov && \
+   echo "pcov.enabled=0" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
+   echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
