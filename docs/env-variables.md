@@ -19,6 +19,7 @@ These variables are for configuring the container. They can be set via the `dock
 | XHGUI_MONGO_URI      | `global-xhgui:27017` | d,php  | (php-dev) sets the report DB [see profiling](./profiling.md) [docs xhgui collector]                             |
 | XHGUI_PROFILING      | `enabled`            | d,php  | (php-dev) disables the profiling completely [docs xhgui collector]                                              |
 | COMPOSE_PROJECT_NAME | (see docs)           | d      | (docker-compose) [docs php-dev](./docker-project-name.md) [docs docker]                                         |
+| TZ                   | `Europe/Berlin`      | d      | (php-dev) [docs](https://www.php.net/manual/en/timezones.php)                                                   |
 
 
 [docs webdevops]: https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-apache-dev.html

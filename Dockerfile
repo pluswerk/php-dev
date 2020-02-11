@@ -54,9 +54,10 @@ ENV \
     PHP_DISPLAY_ERRORS="1" \
     PHP_MEMORY_LIMIT="-1" \
     XHGUI_MONGO_URI="global-xhgui:27017" \
-    XHGUI_PROFILING="enabled"
+    XHGUI_PROFILING="enabled" \
+    TZ=Europe/Berlin
 
-COPY entrypoint.d/* /entrypoint.d/
+COPY entrypoint.d/* /opt/docker/provision/entrypoint.d/
 
 # set apache user group to application:
 RUN if [ -f /etc/apache2/envvars ]; then sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=application/g' /etc/apache2/envvars ; fi
