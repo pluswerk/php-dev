@@ -29,8 +29,8 @@ RUN cd /tmp && \
 
 RUN pecl install pcov && \
    docker-php-ext-enable pcov && \
-   echo "pcov.enabled=0" >> /opt/docker/etc/php/php.ini && \
-   echo "pcov.exclude=~vendor~" >> /opt/docker/etc/php/php.ini
+   echo "pcov.enabled=0" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
+   echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
 USER application
 RUN composer global require hirak/prestissimo davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
