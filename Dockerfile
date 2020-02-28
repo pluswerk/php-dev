@@ -52,6 +52,7 @@ RUN echo "source ~/.additional_bashrc.sh" >> ~/.bashrc
 USER root
 
 ENV \
+    COMPOSER_HOME=/home/application/.composer \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
     PHP_DISMOD="ioncube" \
     PHP_DISPLAY_ERRORS="1" \

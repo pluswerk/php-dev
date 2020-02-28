@@ -14,6 +14,8 @@ test "$(php -m | grep xdebug)" = "" &&
 test "$(php -i | grep auto_prepend_file)" = "auto_prepend_file => /opt/docker/profiler.php => /opt/docker/profiler.php" &&
 # test tideways is installed
 test "$(php -m | grep tideways)" = "tideways_xhprof" &&
+# is hirak/prestissimo installed in composer
+[[ "$(composer global show 2>&1 | grep 'hirak/prestissimo')" =~ ^hirak/prestissimo.* ]] &&
 # sudo should be installed
 sudo echo 'done' &&
 # nano should be installed
