@@ -30,7 +30,7 @@ PHP_IDE_CONFIG="serverName=Unnamed" XDEBUG_CONFIG="remote_enable=1" php #...
 
 ## WEB:
 
-We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc.)
+We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
 <br />hint: using the xdebug-helper also works for the xh-profiler, see [PHP Profiling](profiling.md) for more information
 
 ### Listening for PHP Debug Sessions:
