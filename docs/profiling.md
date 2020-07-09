@@ -2,7 +2,7 @@
 
 ``Profiling only works in php >= 7.0``
 
-Profiling is active by default. The recording can be triggered in to different ways:
+Profiling is active by default. The recording can be triggered in two different ways:
 - Setting the Env Variable `PROFILING_ENABLED`
 - Setting the Cookie `XDEBUG_PROFILE`
   - to set the Cookie you can use the [Xdebug helper] Chrome Extension. 
