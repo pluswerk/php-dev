@@ -5,7 +5,7 @@ ENV XHPROF_VERSION=5.0.2
 
 # Install additional software
 RUN apt-get update && \
-  apt-get install -y sudo vim nano less tree bash-completion mariadb-client iputils-ping && \
+  apt-get install -y sudo vim nano less tree bash-completion mariadb-client iputils-ping sshpass && \
   usermod -aG sudo application && \
   echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
   curl -fsSL https://get.docker.com/ | sh && \
