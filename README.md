@@ -71,7 +71,7 @@ services:
 #      - PIMCORE_ENVIRONMENT=development_docker
 #      - TYPO3_CONTEXT=Development/docker
 
-#      Don't forget to connect via ./start.sh
+#      Don't forget to connect via bash start.sh
       - APPLICATION_UID=${APPLICATION_UID:-1000}
       - APPLICATION_GID=${APPLICATION_GID:-1000}
 
@@ -80,7 +80,12 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
-    command: tail -f /dev/null
+    environment:
+#      Don't forget to connect via bash start.sh
+      - APPLICATION_UID=${APPLICATION_UID:-1000}
+      - APPLICATION_GID=${APPLICATION_GID:-1000}
+    stop_signal: SIGKILL
+    entrypoint: bash -c 'groupmod -g $$APPLICATION_GID node; usermod -u $$APPLICATION_UID node; tail -f /dev/null'
 
 networks:
   default:
