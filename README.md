@@ -58,7 +58,7 @@ services:
 
     environment:
 #     Take a look at VIRTUAL_* in the documentation under Nginx Reverse Proxy
-      - VIRTUAL_HOST=docker-website.${TLD_DOMAIN:-docker},sub.docker-website.${TLD_DOMAIN:-docker}
+      - VIRTUAL_HOST=docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required},sub.docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required}
 #     - HTTPS_METHOD=noredirect
 
       - WEB_DOCUMENT_ROOT=/app/public
