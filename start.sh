@@ -27,7 +27,7 @@ function startFunction {
         return
         ;;
      up)
-        docker-compose --project-directory . -f compose/${CONTEXT}/docker-compose.yml up -d
+        docker-compose --project-directory . -f compose/${CONTEXT}/docker-compose.yml up -d --remove-orphans
         return
         ;;
      down)
