@@ -16,7 +16,7 @@ test "$(php -i | grep auto_prepend_file)" = "auto_prepend_file => /opt/docker/pr
 test "$(php -m | grep tideways)" = "tideways_xhprof" &&
 # is hirak/prestissimo installed in composer1
 [[ "$(composer1 global show 2>&1 | grep 'hirak/prestissimo')" =~ ^hirak/prestissimo.* ]] &&
-# is hirak/prestissimo installed in composer1
+# is hirak/prestissimo installed in composer2
 [[ "$(composer2 global show 2>&1 | grep 'davidrjonas/composer-lock-diff')" =~ ^davidrjonas/composer-lock-diff.* ]] &&
 # sudo should be installed
 sudo echo 'done' &&
@@ -36,9 +36,9 @@ tree --version &&
 ping -V &&
 # docker should be installed
 docker --version &&
-# composer should be installed
+# composer1 should be installed
 composer1 --version &&
-# composer should be installed
+# composer2 should be installed
 composer2 --version &&
 # timezone should be berlin
 cat /etc/timezone &&
