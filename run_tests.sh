@@ -36,6 +36,8 @@ tree --version &&
 ping -V &&
 # docker should be installed
 docker --version &&
+# composer should be installed (version 2)
+composer --version &&
 # composer1 should be installed
 composer1 --version &&
 # composer2 should be installed
