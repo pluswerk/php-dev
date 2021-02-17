@@ -62,8 +62,8 @@ services:
 #     - HTTPS_METHOD=noredirect
 
       - WEB_DOCUMENT_ROOT=/app/public
-      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST:-}
-      - XDEBUG_REMOTE_PORT=${XDEBUG_REMOTE_PORT:-9000}
+      - XDEBUG_CLIENT_HOST=${XDEBUG_CLIENT_HOST:-}
+      - XDEBUG_CLIENT_PORT=${XDEBUG_CLIENT_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
 
 #      Project Env vars (enable what you need)
