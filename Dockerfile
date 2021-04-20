@@ -1,7 +1,7 @@
-ARG FROM=webdevops/php-nginx-dev:7.4
+ARG FROM=webdevops/php-nginx-dev:8.0
 FROM $FROM
 
-ENV XHPROF_VERSION=5.0.2
+ENV XHPROF_VERSION=5.0.4
 
 # Install additional software
 RUN apt-get update && \
