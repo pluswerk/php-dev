@@ -2,7 +2,7 @@
 
 You can set the default value for the PHP_DEBUGGER in your `.env` file:
 ````env
-XDEBUG_REMOTE_HOST=10.50.1.223
+XDEBUG_CLIENT_HOST=10.50.1.223
 ````
 
 `XDEBUG_REMOTE_HOST` is the ip-address of your IDE <br />
