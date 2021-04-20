@@ -28,7 +28,7 @@ RUN cd /tmp && \
       echo "auto_prepend_file=/opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini
 
 RUN pecl install pcov && \
-   docker-php-ext-enable pcov && \
+   docker-php-ext-enable pcov mongodb && \
    echo "pcov.enabled=0" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
    echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
