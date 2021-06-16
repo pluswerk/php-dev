@@ -53,7 +53,7 @@ services:
 # the docker socket is optional if no node container is needed
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ~/.ssh:/home/application/.ssh
-      - ~/.composer/cache:/home/application/.composer/cache
+      - ~/.composer:/home/application/.composer
       - ~/.gitconfig:/home/application/.gitconfig
 
     environment:
