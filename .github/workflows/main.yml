@@ -5,8 +5,10 @@ on:
     # build every tuesday
     - cron: '0 10 * * 2'
   push:
-    branches:
-      - 'main'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 
 jobs:
   docker:
@@ -37,7 +39,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }},pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}-${{ steps.date.outputs.date }}
           build-args: FROM=webdevops/php-${{ matrix.webserver }}-dev:${{ matrix.php }}
       -
