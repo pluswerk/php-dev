@@ -72,6 +72,4 @@ RUN if [ -f /etc/nginx/nginx.conf ]; then sed -i 's/user www-data;/user applicat
 # https://stackoverflow.com/questions/52998331/imagemagick-security-policy-pdf-blocking-conversion#comment110879511_59193253
 RUN sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml
 
-COPY run_tests.sh /tmp/run_tests.sh
-
 WORKDIR /app

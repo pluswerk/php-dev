@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# push image again but with date tag
-
-printf "hooks/build: IMAGE_NAME: %s\n" "$IMAGE_NAME"
-
-DATE=$(date +%Y-%m-%d)
-
-docker push $IMAGE_NAME-$DATE
