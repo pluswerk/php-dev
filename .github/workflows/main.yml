@@ -2,8 +2,8 @@ name: ci
 
 on:
   schedule:
-    # build every tuesday
-    - cron: '* * 1 * *'
+    # build every first of the month
+    - cron: '0 0 1 * *'
   push:
     branches: [ main ]
   pull_request:
