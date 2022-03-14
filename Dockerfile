@@ -32,6 +32,8 @@ RUN pecl install pcov && \
    echo "pcov.enabled=0" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
    echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
+RUN composer self-update --clean-backups
+
 USER application
 RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
     composer clear
