@@ -33,7 +33,7 @@ RUN pecl install pcov && \
    echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
 USER application
-RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
+RUN composer self-update && composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
     composer clear
 
 # add .git-completion.bash
