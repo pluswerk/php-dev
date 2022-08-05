@@ -35,7 +35,7 @@ RUN pecl install pcov && \
 RUN composer self-update --clean-backups
 
 USER application
-RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
+RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter perftools/php-profiler && \
     composer clear
 
 # add .git-completion.bash
