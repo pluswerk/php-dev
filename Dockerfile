@@ -33,15 +33,11 @@ RUN pecl install pcov && \
    echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
 RUN composer self-update --clean-backups
+RUN php -r "version_compare(PHP_VERSION, '7.2', '>=') && print_r(exec('composer completion bash > /etc/bash_completion.d/composer'));"
 
 USER application
 RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter && \
     composer clear
-
-# add .git-completion.bash
-RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-completion.bash > /home/application/.git-completion.bash
-# add .git-prompt.bash
-RUN curl https://raw.githubusercontent.com/git/git/v$(git --version | awk 'NF>1{print $NF}')/contrib/completion/git-prompt.sh > /home/application/.git-prompt.sh
 
 # add .additional_bashrc.sh
 COPY bin/* /usr/local/bin/
