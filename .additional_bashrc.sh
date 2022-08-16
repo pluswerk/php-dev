@@ -3,8 +3,6 @@ export EXA_COLORS="da=1;34:gm=1;34"
 alias ls='exa'
 alias ll='ls -aalh --git --header --group'
 export PATH=$PATH:~/.config/composer/vendor/bin:./bin:./vendor/bin:./node_modules/.bin
-source ~/.git-completion.bash
-source ~/.git-prompt.sh
 
 # only enable docker aliases if docker-socket is mounted
 CONTAINER_ID=$(basename $(cat /proc/1/cpuset))
