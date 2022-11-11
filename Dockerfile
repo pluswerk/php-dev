@@ -7,7 +7,7 @@ ENV XHPROF_VERSION=5.0.4
 RUN apt-get update && \
   apt-get install -y sudo vim nano less tree bash-completion mariadb-client iputils-ping sshpass gdb exa && \
   usermod -aG sudo application && \
-  echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+  echo "application ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
   curl -fsSL https://get.docker.com/ | sh && \
   rm -rf /var/lib/apt/lists/*
 
