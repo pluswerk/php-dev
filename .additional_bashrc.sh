@@ -5,7 +5,7 @@ alias ll='ls -aalh --git --header --group'
 export PATH=$PATH:~/.config/composer/vendor/bin:./bin:./vendor/bin:./node_modules/.bin
 
 # only enable docker aliases if docker-socket is mounted
-CONTAINER_ID=$(basename $(cat /proc/1/cpuset))
+CONTAINER_ID=$(basename $(findmnt /etc/hosts -o SOURCE | grep -o 'containers\/.\+\/'))
 export HOST_DISPLAY_NAME=$HOSTNAME
 if sudo docker ps -q &>/dev/null; then
   DOCKER_COMPOSE_PROJECT=$(sudo docker inspect ${CONTAINER_ID} | grep '"com.docker.compose.project":' | awk '{print $2}' | tr --delete '"' | tr --delete ',')
