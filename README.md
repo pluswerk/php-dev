@@ -89,8 +89,8 @@ services:
 
 networks:
   default:
-    external:
-      name: global
+    name: global
+    external: true
 ```
 
 **Hint for the example above:**
