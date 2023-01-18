@@ -76,7 +76,7 @@ services:
       - APPLICATION_GID=${APPLICATION_GID:-1000}
 
   node:
-    image: node:lts
+    image: node:18
     volumes:
       - ./:/app
     working_dir: /app
