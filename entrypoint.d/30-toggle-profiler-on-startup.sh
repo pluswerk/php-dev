@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 if [ -n "${PHP_DEBUGGER:-}" ] && [[ "${PHP_DEBUGGER}" = 'xdebug' ]]; then
-  xdebug-enable;
+  echo 'xdebug-enable:'
+  xdebug-enable || true;
 else
-  xdebug-disable;
+  echo 'xdebug-disable:'
+  xdebug-disable || true;
 fi;

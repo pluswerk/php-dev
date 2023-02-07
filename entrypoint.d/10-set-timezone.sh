@@ -10,4 +10,4 @@ echo ${TZ} >/etc/timezone
 
 ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 
-dpkg-reconfigure -f noninteractive tzdata &> /dev/null
+#dpkg-reconfigure -f noninteractive tzdata &> /dev/null
