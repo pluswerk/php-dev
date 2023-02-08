@@ -4,6 +4,16 @@ PHP-DEV is a small package that includes a web server, PHP and some tools needed
 You can easily decide which version of PHP you want to use and whether you want to start an Apache or a Nginx webserver by setting the values in a docker-compose.yml.
 We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-global) as a wrapper for your projects, since this Dockerfile has been built keeping that in mind.
 
+# Tags
+
+- php versions supported: `7.1`-`8.2`
+- webserver supported: `nginx` and `apache`
+- alpine images: `-alpine`
+- examples
+  - `pluswerk/php-dev:nginx-8.2-alpine`
+  - `pluswerk/php-dev:apache-7.1-alpine`
+  - `pluswerk/php-dev:nginx-8.0`
+
 ## Setup
 
 Create a `compose/Development/docker-compose.yml` like shown below.  
@@ -46,7 +56,7 @@ version: '3.5'
 
 services:
   web:
-    image: pluswerk/php-dev:nginx-8.1
+    image: pluswerk/php-dev:nginx-8.2-alpine
 
     volumes:
       - .:/app

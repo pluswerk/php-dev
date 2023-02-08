@@ -4,13 +4,17 @@
 // we want minimal file inclusion.
 
 if ((isset($_COOKIE['XDEBUG_PROFILE']) || getenv('PROFILING_ENABLED'))) {
-    require_once '/home/application/.config/composer/vendor/perftools/php-profiler/autoload.php';
+    $composerVendorDir = '/home/application/.composer/vendor';
+    if (!is_dir($composerVendorDir)) {
+        $composerVendorDir = '/home/application/.config/composer/vendor';
+    }
+    require_once $composerVendorDir . '/perftools/php-profiler/autoload.php';
 
-    $tmpFile = '/tmp/'. uniqid('xhgui', true) . '.data.jsonl';
+    $tmpFile = '/tmp/' . uniqid('xhgui', true) . '.data.jsonl';
 
     $profiler = new \Xhgui\Profiler\Profiler(
         [
-            'profiler' => \Xhgui\Profiler\Profiler::PROFILER_TIDEWAYS_XHPROF,
+            'profiler' => \Xhgui\Profiler\Profiler::PROFILER_XHPROF,
             #  'save.handler' => \Xhgui\Profiler\Profiler::SAVER_MONGODB,
 
             'save.handler' => \Xhgui\Profiler\Profiler::SAVER_FILE,
@@ -23,9 +27,9 @@ if ((isset($_COOKIE['XDEBUG_PROFILE']) || getenv('PROFILING_ENABLED'))) {
     $profiler->enable();
 
 
-    register_shutdown_function(static function () use ($tmpFile, $profiler) {
+    register_shutdown_function(static function () use ($composerVendorDir, $tmpFile, $profiler) {
         //we want this autoloading only after the main php script executed everything.
-        require_once '/home/application/.config/composer/vendor/autoload.php';
+        require_once $composerVendorDir . '/autoload.php';
         $profiler->stop();
 
         //huge performance Optimisation possible:

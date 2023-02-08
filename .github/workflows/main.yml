@@ -19,6 +19,7 @@ jobs:
       matrix:
         php: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
         webserver: [ 'apache', 'nginx' ]
+        distroAddon: [ '', '-alpine' ]
     steps:
       -
         name: Set up QEMU
@@ -36,13 +37,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push ${{ matrix.webserver }}-${{ matrix.php }}
+        name: Build and push ${{ matrix.webserver }}-${{ matrix.php }}-${{ matrix.distro }}
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }},pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}-${{ steps.date.outputs.date }}
-          build-args: FROM=webdevops/php-${{ matrix.webserver }}-dev:${{ matrix.php }}
+          tags: pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }},pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }}-${{ steps.date.outputs.date }}
+          build-args: |
+            FROM=webdevops/php-${{ matrix.webserver }}-dev:${{ matrix.php }}${{ matrix.distroAddon }}
+            DIST_ADDON=${{ matrix.distroAddon }}
       -
         name: Image digest
         run: |
