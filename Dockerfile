@@ -2,7 +2,7 @@ ARG FROM=webdevops/php-nginx-dev:8.2
 ARG DIST_ADDON=
 FROM $FROM as base-alpine
 # Install additional software Alpine:
-RUN apk add --no-cache sudo vim nano less tree bash-completion mariadb-client iputils sshpass gdb tzdata findmnt jq docker-cli && \
+RUN apk add --no-cache sudo vim nano less tree bash-completion mariadb-client iputils sshpass gdb tzdata findmnt jq docker-cli file && \
     echo "application ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 FROM $FROM as base
