@@ -30,14 +30,14 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       -
         name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push ${{ matrix.webserver }}-${{ matrix.php }}-${{ matrix.distro }}
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
 #          push: ${{ github.ref == 'refs/heads/main' }}
           push: true
