@@ -10,9 +10,9 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
 - webserver supported: `nginx` and `apache`
 - alpine images: `-alpine`
 - examples
-  - `pluswerk/php-dev:nginx-8.2-alpine`
-  - `pluswerk/php-dev:apache-7.1-alpine`
-  - `pluswerk/php-dev:nginx-8.0`
+  - `ghcr.io/pluswerk/php-dev:nginx-8.2-alpine`
+  - `ghcr.io/pluswerk/php-dev:apache-7.1-alpine`
+  - `ghcr.io/pluswerk/php-dev:nginx-8.0`
 
 ## Setup
 
@@ -56,7 +56,7 @@ version: '3.5'
 
 services:
   web:
-    image: pluswerk/php-dev:nginx-8.2-alpine
+    image: ghcr.io/pluswerk/php-dev:nginx-8.2-alpine
 
     volumes:
       - .:/app
