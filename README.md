@@ -13,6 +13,7 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
   - `ghcr.io/pluswerk/php-dev:nginx-8.2-alpine`
   - `ghcr.io/pluswerk/php-dev:apache-7.1-alpine`
   - `ghcr.io/pluswerk/php-dev:nginx-8.0`
+- list of [all Tags](https://github.com/pluswerk/php-dev/pkgs/container/php-dev/versions?filters%5Bversion_type%5D=tagged)
 
 ## Setup
 
