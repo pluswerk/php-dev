@@ -40,8 +40,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v4
         with:
-#          push: ${{ github.ref == 'refs/heads/main' }}
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }},ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }}-${{ steps.date.outputs.date }}
           build-args: |
             FROM=webdevops/php-${{ matrix.webserver }}-dev:${{ matrix.php }}${{ matrix.distroAddon }}
