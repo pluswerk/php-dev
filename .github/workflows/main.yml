@@ -5,7 +5,6 @@ on:
     # build every first of the month
     - cron: '0 0 1 * *'
   push:
-  pull_request:
   workflow_dispatch:
 
 
