@@ -1,5 +1,5 @@
-ARG FROM=webdevops/php-nginx-dev:8.2
-ARG DIST_ADDON=
+ARG FROM=webdevops/php-nginx-dev:8.2-alpine
+ARG DIST_ADDON=-alpine
 FROM $FROM as base-alpine
 # Install additional software Alpine:
 RUN apk add --no-cache sudo vim nano git-perl less tree bash-completion mariadb-client iputils sshpass gdb tzdata findmnt jq docker-cli file && \

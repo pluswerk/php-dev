@@ -10,14 +10,6 @@ if sudo docker ps -q &>/dev/null; then
   export NODE_CONTAINER=$(sudo docker ps -f "name=${DOCKER_COMPOSE_PROJECT}" --format {{.Names}} | grep node)
   export HOST_DISPLAY_NAME=$(sudo docker inspect ${CONTAINER_ID} --format='{{.Name}}')
   export HOST_DISPLAY_NAME=${HOST_DISPLAY_NAME:1}
-
-  alias node_exec='sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER}'
-  alias node_root_exec='sudo docker exec -w $(pwd) -it ${NODE_CONTAINER}'
-
-  alias node='node_exec node'
-  alias npm='node_exec npm'
-  alias npx='node_exec npx'
-  alias yarn='node_exec yarn'
 fi;
 
 if [[ $CONTAINER_ID != ${HOSTNAME}* ]] ; then

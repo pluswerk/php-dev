@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+[[ -z "$NODE_CONTAINER" ]] && { echo "node container is not running. (\$NODE_CONTAINER is empty)" ; exit 1; }
+
+sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} "$@"
