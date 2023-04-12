@@ -35,12 +35,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
         name: Build and push ${{ matrix.webserver }}-${{ matrix.php }}-${{ matrix.distro }}
         id: docker_build
         uses: docker/build-push-action@v4
         with:
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }},ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }}-${{ steps.date.outputs.date }}
+          tags: ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }},ghcr.io/pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }}-${{ steps.date.outputs.date }},    pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }},pluswerk/php-dev:${{ matrix.webserver }}-${{ matrix.php }}${{ matrix.distroAddon }}-${{ steps.date.outputs.date }}
           build-args: |
             FROM=webdevops/php-${{ matrix.webserver }}-dev:${{ matrix.php }}${{ matrix.distroAddon }}
             DIST_ADDON=${{ matrix.distroAddon }}
