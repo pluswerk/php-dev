@@ -12,6 +12,8 @@ if sudo docker ps -q &>/dev/null; then
   export HOST_DISPLAY_NAME=${HOST_DISPLAY_NAME:1}
 fi;
 
+export HISTCONTROL=ignoreboth:erasedups
+
 if [[ $CONTAINER_ID != ${HOSTNAME}* ]] ; then
   export HOST_DISPLAY_NAME=$HOSTNAME
 fi
