@@ -27,5 +27,10 @@ alias xdebug-toggle='test $(php -m | grep xdebug) && xdebug-disable && echo "xde
 # Run SSH Agent and add key 7d
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval `ssh-agent -s`
-  ssh-add -t 604800 ~/.ssh/id_rsa
+  if [ -f ~/.ssh/id_rsa ]; then
+    ssh-add -t 604800 ~/.ssh/id_rsa
+  fi
+  if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-add -t 604800 ~/.ssh/id_ed25519
+  fi
 fi
