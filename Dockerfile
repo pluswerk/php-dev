@@ -40,15 +40,8 @@ COPY .vimrc /home/application/.vimrc
 COPY .vimrc /root/.vimrc
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
 
-RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter perftools/php-profiler && \
-    composer clear && \
-    echo "source ~/.additional_bashrc.sh" >> ~/.bashrc && \
-    curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
-
-USER root
-
 ENV \
-    COMPOSER_CACHE_DIR=/home/application/.composer/cache \
+    COMPOSER_HOME=/home/application/.composer \
     POSTFIX_RELAYHOST="[global-mail]:1025" \
     PHP_DISMOD="ioncube,tideways" \
     PHP_DISPLAY_ERRORS="1" \
@@ -56,5 +49,12 @@ ENV \
     XHGUI_MONGO_URI="global-xhgui:27017" \
     XHGUI_PROFILING="enabled" \
     TZ=Europe/Berlin
+
+RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter perftools/php-profiler && \
+    composer clear && \
+    echo "source ~/.additional_bashrc.sh" >> ~/.bashrc && \
+    curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
+
+USER root
 
 WORKDIR /app
