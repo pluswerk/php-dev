@@ -35,7 +35,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
   fi
 fi
 
-if [ -v "$VIRTUAL_HOST" ] ; then
+if [ -v VIRTUAL_HOST ] ; then
   echo 'Frontend URLs:'
   echo $VIRTUAL_HOST | tr "," "\n" | awk '{print "  https://" $0}'
 fi
