@@ -34,3 +34,8 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
     ssh-add -t 604800 ~/.ssh/id_ed25519
   fi
 fi
+
+if [ -v "$VIRTUAL_HOST" ] ; then
+  echo 'Frontend URLs:'
+  echo $VIRTUAL_HOST | tr "," "\n" | awk '{print "  https://" $0}'
+fi
