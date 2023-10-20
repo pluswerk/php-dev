@@ -45,7 +45,7 @@ function startFunction {
      # this is useful if you need to have your ssh-agent available for executing a command e.g composer install
      # example usage: bash start.sh run-with-agent -T web composer install --no-dev --ansi --verbose
      run-with-agent)
-        docker-compose --project-directory . -f compose/${CONTEXT}/docker-compose.yml run -u $USER --rm --entrypoint= $SSH_AGENT_PART ${@:2}
+        docker-compose --project-directory . -f compose/${CONTEXT}/docker-compose.yml run --rm -u $USER --rm --entrypoint= $SSH_AGENT_PART ${@:2}
         return
         ;;
      *)
