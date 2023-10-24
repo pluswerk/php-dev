@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The current Version of this file can be found HERE:
-# https://github.com/pluswerk/php-dev/blob/master/start.sh
+# https://github.com/pluswerk/php-dev/blob/main/start.sh
 
 [ -f .env ] && . .env
 
