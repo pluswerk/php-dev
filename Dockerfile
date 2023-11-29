@@ -35,7 +35,7 @@ RUN install-php-extensions @fix_letsencrypt xhprof mongodb pcov && \
 USER application
 
 COPY bin/* /usr/local/bin/
-COPY .additional_bashrc.sh /home/application/.additional_bashrc.sh
+COPY .additional_bashrc.sh .additional_bashrc_ps1.sh /home/application/
 COPY .vimrc /home/application/.vimrc
 COPY .vimrc /root/.vimrc
 COPY apache.conf /opt/docker/etc/httpd/vhost.common.d/apache.conf
