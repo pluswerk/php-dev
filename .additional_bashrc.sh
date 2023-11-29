@@ -38,3 +38,6 @@ if [ -v VIRTUAL_HOST ] ; then
   echo 'Frontend URLs:'
   echo $VIRTUAL_HOST | tr "," "\n" | awk '{print "  https://" $0}'
 fi
+
+# makes it possible to add custom prompt functions without cahnging the entrypoint:
+test -f ./after-bashrc_*.sh && source ./after-bashrc_*.sh || true
