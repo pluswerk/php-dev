@@ -7,7 +7,7 @@ CONTAINER_ID=$(basename $(findmnt /etc/hosts -o SOURCE | grep -o 'containers\/.\
 export HOST_DISPLAY_NAME=$HOSTNAME
 if sudo docker ps -q &>/dev/null; then
   DOCKER_COMPOSE_PROJECT=$(sudo docker inspect ${CONTAINER_ID} | jq -r '.[0].Config.Labels."com.docker.compose.project"')
-  export NODE_CONTAINER=$(sudo docker ps -f "name=${DOCKER_COMPOSE_PROJECT}" --format {{.Names}} | grep node)
+  export NODE_CONTAINER=$(sudo docker ps --format {{.Names}} | grep ^${DOCKER_COMPOSE_PROJECT} | grep node)
   export HOST_DISPLAY_NAME=$(sudo docker inspect ${CONTAINER_ID} --format='{{.Name}}')
   export HOST_DISPLAY_NAME=${HOST_DISPLAY_NAME:1}
 fi;
