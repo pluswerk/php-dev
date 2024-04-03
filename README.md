@@ -6,11 +6,11 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
 
 # Tags
 
-- php versions supported: `7.1`-`8.2`
+- php versions supported: `7.1`-`8.3`
 - webserver supported: `nginx` and `apache`
 - alpine images: `-alpine`
 - examples
-  - `ghcr.io/pluswerk/php-dev:nginx-8.2-alpine`
+  - `ghcr.io/pluswerk/php-dev:nginx-8.3-alpine`
   - `ghcr.io/pluswerk/php-dev:apache-7.1-alpine`
   - `ghcr.io/pluswerk/php-dev:nginx-8.0`
 - list of [all Tags](https://github.com/pluswerk/php-dev/pkgs/container/php-dev/versions?filters%5Bversion_type%5D=tagged)
@@ -57,7 +57,7 @@ version: '3.5'
 
 services:
   web:
-    image: ghcr.io/pluswerk/php-dev:nginx-8.2-alpine
+    image: ghcr.io/pluswerk/php-dev:nginx-8.3-alpine
 
     volumes:
       - .:/app
