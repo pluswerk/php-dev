@@ -1,50 +1,63 @@
 # Xdebug
 
-You can set the default value for the PHP_DEBUGGER in your `.env` file:
-````env
-# xdebug 3:
-XDEBUG_CLIENT_HOST=10.50.1.223
-# xdebug 2:
-XDEBUG_REMOTE_HOST=10.50.1.223
-````
+## Setup in PhpStorm
 
-`XDEBUG_CLIENT_HOST` is the ip-address of your IDE <br />
-Information on how to set up xdebug with PHPStorm is here: [Creating a PHP Debug Server](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html)
+You need to create a PHP->Server Config.  
+chose a name you like or fallback to `_`.  
+Add the Host `_` it is important that you use this exact Host. only with this Setting it will work in the newest PhpStorm version.
+Setup th path mapping like the marked line in the picture: `project files -> /app`.
 
-hint: if `PHP_DEBUGGER` is set to `xdebug`, then the xh-profiler won't profile anything 
+![PhpStorm Settings Php Servers][xdebug-setup]
 
-## enable and disable xdebug in running container:
+Read more: [Creating a PHP Debug Server](https://www.jetbrains.com/help/phpstorm/creating-a-php-debug-server-configuration.html)
+
+## Usage in PhpStorm
+
+You can use the listening Feature in the Top of PhpStorm
+
+![Listen for Debugging Connections][xdebug-listen]
+
+## start xdebug
+
+By default xdebug is disabled in the container.  
+You can enable it by running `xdebug-enable` inside the container. (will disable xh-profiler)  
+You can disable it by running `xdebug-disable` inside the container. (will enable xh-profiler again)  
+
+it will also restart the `fpm` processes
+
+### Web Debugging
+
+We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/debug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)  
+> hint: using the xdebug-helper also works for the xh-profiler, see [PHP Profiling](profiling.md) for more information
+
+
+### Cli Debugging
 
 ````bash
-# enables xdebug and restarts fpm (hint: this also disables the xh-profiler)
-xdebug-enable
-# disable xdebug and restarts fpm (hint: this also enables the xh-profiler)
-xdebug-disable
-# the following alias toggles xdebug and xh-profiler
-xdebug-toggle
+export XDEBUG_CLIENT_HOST=172.23.96.1
+export PHP_IDE_CONFIG="serverName=_"
 ````
 
-# With xdebug enabled you need to activate xdebug on script run.
+`XDEBUG_CLIENT_HOST` is the ip-address of your IDE  
+`serverName` is the Host input field in PhpStorm PHP->Server setting
 
-## CLI: run any php script with this prefixed:
+> you can Also put these in the .env of the project. (if corresponding the 2 lines are in the docker-compose.yml)
+
+Than if you run your command that you want to debug you should add `XDEBUG_CONFIG="client_enable=1"` in front of it.
 ````
-# xdebug 3:
-PHP_IDE_CONFIG="serverName=Unnamed" XDEBUG_CONFIG="client_enable=1" php #...
-# xdebug 2:
-PHP_IDE_CONFIG="serverName=Unnamed" XDEBUG_CONFIG="remote_enable=1" php #...
+XDEBUG_CONFIG="client_enable=1" ...
 ````
 
-## WEB:
+## Problem Solving:
 
-We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
-<br />hint: using the xdebug-helper also works for the xh-profiler, see [PHP Profiling](profiling.md) for more information
+you can enable the xdebug log like this:
 
-### Listening for PHP Debug Sessions:
+`touch xdebug.log`
 
-If you want to use the "Start Listening for PHP Debug Connections" Button in PHPStorm, you can set these ENV variables:
-Where Unnamed is the name of the server config in PHPStorm.
+add this to your docker-compose.yml
 ````
-    - php.xdebug.client_enable=1
-    - php.xdebug.client_autostart=1
-    - PHP_IDE_CONFIG=serverName=Unnamed
+      - php.xdebug.log=/app/xdebug.log
 ````
+
+[xdebug-setup]: ./images/xdebug-phpstorm-server-config.png
+[xdebug-listen]: ./images/xdebug-listen.png
