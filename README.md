@@ -74,8 +74,8 @@ services:
 
       - WEB_DOCUMENT_ROOT=/app/public
       - XDEBUG_CLIENT_HOST=${XDEBUG_CLIENT_HOST:-}
-      - XDEBUG_CLIENT_PORT=${XDEBUG_CLIENT_PORT:-9000}
       - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
+      - PHP_IDE_CONFIG=${XDEBUG_IDEKEY:-"serverName=_"}
 
 #      Project Env vars (enable what you need)
 #      - APP_ENV=development_docker
