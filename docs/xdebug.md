@@ -5,7 +5,7 @@
 You need to create a PHP->Server Config.  
 chose a name you like or fallback to `_`.  
 Add the Host `_` it is important that you use this exact Host. only with this Setting it will work in the newest PhpStorm version.
-Setup th path mapping like the marked line in the picture: `project files -> /app`.
+Setup the path mapping like the marked line in the picture: `project files -> /app`.
 
 ![PhpStorm Settings Php Servers][xdebug-setup]
 
