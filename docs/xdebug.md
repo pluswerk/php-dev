@@ -52,7 +52,9 @@ XDEBUG_CONFIG="client_enable=1" ...
 
 you can enable the xdebug log like this:
 
-`touch xdebug.log`
+````
+touch xdebug.log
+````
 
 add this to your docker-compose.yml
 ````
