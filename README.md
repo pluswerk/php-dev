@@ -53,8 +53,6 @@ Further information can be found in the Documentation.
 Example file: compose/Development/docker-compose.yml
 
 ```yaml
-version: '3.5'
-
 services:
   web:
     image: ghcr.io/pluswerk/php-dev:nginx-8.3-alpine
