@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ -v VIRTUAL_HOST ] ; then
+  echo 'Frontend URLs:'
+  echo $VIRTUAL_HOST | tr "," "\n" | awk '{print "  https://" $0}'
+else
+  echo 'no $VIRTUAL_HOST env set'
+fi

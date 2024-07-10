@@ -34,10 +34,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
   fi
 fi
 
-if [ -v VIRTUAL_HOST ] ; then
-  echo 'Frontend URLs:'
-  echo $VIRTUAL_HOST | tr "," "\n" | awk '{print "  https://" $0}'
-fi
+urls
 
-# makes it possible to add custom prompt functions without cahnging the entrypoint:
+# makes it possible to add custom prompt functions without changing the entrypoint:
 test -f ./after-bashrc_*.sh && source ./after-bashrc_*.sh || true
