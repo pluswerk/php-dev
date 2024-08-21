@@ -37,4 +37,4 @@ fi
 urls
 
 # makes it possible to add custom prompt functions without changing the entrypoint:
-test -f ./after-bashrc_*.sh && source ./after-bashrc_*.sh || true
+test -f ~/after-bashrc_*.sh && source ~/after-bashrc_*.sh || true
