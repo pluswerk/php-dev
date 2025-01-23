@@ -94,7 +94,7 @@ services:
       - APPLICATION_UID=${APPLICATION_UID:-1000}
       - APPLICATION_GID=${APPLICATION_GID:-1000}
     stop_signal: SIGKILL
-    entrypoint: bash -c 'groupmod -g $$APPLICATION_GID node; usermod -u $$APPLICATION_UID node; tail -f /dev/null'
+    entrypoint: bash -c 'groupmod -g $$APPLICATION_GID node; usermod -u $$APPLICATION_UID node; sleep infinity'
 
 networks:
   default:
