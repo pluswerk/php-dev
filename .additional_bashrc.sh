@@ -1,6 +1,6 @@
 export LS_COLORS="${LS_COLORS}di=1;34:"
 alias ll='ls -alh'
-export PATH=$PATH:~/.config/composer/vendor/bin:~/.composer/vendor/bin:./bin:./vendor/bin:./node_modules/.bin
+export PATH=$PATH:~/.config/composer/vendor/bin:~/.composer/vendor/bin:./bin:./vendor/bin:./node_modules/.bin:.
 
 # only enable docker aliases if docker-socket is mounted
 CONTAINER_ID=$(basename $(findmnt /etc/hosts -o SOURCE | grep -o 'containers\/.\+\/'))
