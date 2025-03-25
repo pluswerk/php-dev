@@ -27,7 +27,7 @@ it will also restart the `fpm` processes
 
 ### Web Debugging
 
-We recommend the usage of an enable-disable tool like [Xdebug helper](https://chrome.google.com/webstore/detail/debug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)  
+We recommend the usage of an enable-disable tool like [Xdebug helper](https://chromewebstore.google.com/detail/xdebug-helper-by-jetbrain/aoelhdemabeimdhedkidlnbkfhnhgnhm)  
 > hint: using the xdebug-helper also works for the xh-profiler, see [PHP Profiling](profiling.md) for more information
 
 
