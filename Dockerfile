@@ -19,7 +19,7 @@ FROM base${DIST_ADDON}
 COPY entrypoint.d/* /opt/docker/provision/entrypoint.d/
 COPY profiler.php /opt/docker/profiler.php
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions @fix_letsencrypt xhprof mongodb pcov && \
+RUN install-php-extensions @fix_letsencrypt xhprof pcov && \
     echo "auto_prepend_file=/opt/docker/profiler.php" >> /opt/docker/etc/php/php.ini && \
     echo "pcov.enabled=0" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
     echo "pcov.exclude='~vendor~'" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini && \
@@ -50,7 +50,7 @@ ENV \
     XHGUI_PROFILING="enabled" \
     TZ=Europe/Berlin
 
-RUN composer global require davidrjonas/composer-lock-diff perftools/xhgui-collector alcaeus/mongo-php-adapter perftools/php-profiler && \
+RUN composer global require davidrjonas/composer-lock-diff perftools/php-profiler && \
     composer clear && \
     echo "source ~/.additional_bashrc.sh" >> ~/.bashrc && \
     curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
