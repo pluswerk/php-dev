@@ -6,12 +6,12 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
 
 # Tags
 
-- php versions supported: `8.0`-`8.3`
+- php versions supported: `8.0`-`8.4`
 - php versions unsupported: `5.6`-`7.4`
 - webserver supported: `nginx` and `apache`
 - alpine images: `-alpine`
 - examples
-  - `pluswerk/php-dev:nginx-8.3-alpine`
+  - `pluswerk/php-dev:nginx-8.4-alpine`
   - `pluswerk/php-dev:apache-8.0-alpine`
   - `pluswerk/php-dev:nginx-8.2`
 - list of [all Tags](https://github.com/pluswerk/php-dev/pkgs/container/php-dev/versions?filters%5Bversion_type%5D=tagged)
@@ -56,7 +56,7 @@ Example file: compose/Development/docker-compose.yml
 ```yaml
 services:
   web:
-    image: pluswerk/php-dev:nginx-8.3-alpine
+    image: pluswerk/php-dev:nginx-8.4-alpine
 
     volumes:
       - .:/app
@@ -68,32 +68,32 @@ services:
 
     environment:
 #     Take a look at VIRTUAL_* in the documentation under Nginx Reverse Proxy
-      - VIRTUAL_HOST=docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required},sub.docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required}
-#     - HTTPS_METHOD=noredirect
+      VIRTUAL_HOST: docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required},sub.docker-website.${TLD_DOMAIN:?TLD_DOMAIN is required}
+#     HTTPS_METHOD: noredirect
 
-      - WEB_DOCUMENT_ROOT=/app/public
-      - XDEBUG_CLIENT_HOST=${XDEBUG_CLIENT_HOST:-}
-      - php.xdebug.idekey=${XDEBUG_IDEKEY:-PHPSTORM}
-      - PHP_IDE_CONFIG=${XDEBUG_IDEKEY:-"serverName=_"}
+      WEB_DOCUMENT_ROOT: /app/public
+      XDEBUG_CLIENT_HOST: ${XDEBUG_CLIENT_HOST:-}
+      php.xdebug.idekey: ${XDEBUG_IDEKEY:-PHPSTORM}
+      PHP_IDE_CONFIG: ${XDEBUG_IDEKEY:-"serverName=_"}
 
 #      Project Env vars (enable what you need)
-#      - APP_ENV=development_docker
-#      - PIMCORE_ENVIRONMENT=development_docker
-#      - TYPO3_CONTEXT=Development/docker
+#      APP_ENV: development_docker
+#      PIMCORE_ENVIRONMENT: development_docker
+#      TYPO3_CONTEXT: Development/docker
 
 #      Don't forget to connect via bash start.sh
-      - APPLICATION_UID=${APPLICATION_UID:-1000}
-      - APPLICATION_GID=${APPLICATION_GID:-1000}
+      APPLICATION_UID: ${APPLICATION_UID:-1000}
+      APPLICATION_GID: ${APPLICATION_GID:-1000}
 
   node:
-    image: node:18
+    image: node:24
     volumes:
       - ./:/app
     working_dir: /app
     environment:
 #      Don't forget to connect via bash start.sh
-      - APPLICATION_UID=${APPLICATION_UID:-1000}
-      - APPLICATION_GID=${APPLICATION_GID:-1000}
+      APPLICATION_UID: ${APPLICATION_UID:-1000}
+      APPLICATION_GID: ${APPLICATION_GID:-1000}
     stop_signal: SIGKILL
     entrypoint: bash -c 'groupmod -g $$APPLICATION_GID node; usermod -u $$APPLICATION_UID node; sleep infinity'
 
