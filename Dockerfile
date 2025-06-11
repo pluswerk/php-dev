@@ -2,7 +2,8 @@ ARG FROM=webdevops/php-nginx-dev:8.2-alpine
 ARG DIST_ADDON=-alpine
 FROM $FROM AS base-alpine
 # Install additional software Alpine:
-RUN apk add --no-cache sudo vim nano git-perl less tree bash-completion mariadb-client iputils sshpass gdb tzdata findmnt jq docker-cli file && \
+RUN apk add --no-cache sudo vim nano git-perl less tree bash-completion mariadb-client iputils sshpass gdb tzdata findmnt jq docker-cli docker-compose file && \
+    addgroup application $(getent group 999 | cut -d: -f1) && \
     echo "application ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 FROM $FROM AS base
@@ -10,6 +11,7 @@ FROM $FROM AS base
 RUN apt-get update && \
   apt-get install -y sudo vim nano less tree bash-completion mariadb-client iputils-ping sshpass gdb jq && \
   usermod -aG sudo application && \
+  usermod -aG 999 application && \
   echo "application ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
   curl -fsSL https://get.docker.com/ | sh && \
   rm -rf /var/lib/apt/lists/*
