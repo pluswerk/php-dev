@@ -2,4 +2,9 @@
 
 [[ -z "$NODE_CONTAINER" ]] && { echo "node container is not running. (\$NODE_CONTAINER is empty)" ; exit 1; }
 
-sudo docker exec -u $(id -u):$(id -g) -w $(pwd) -it ${NODE_CONTAINER} "$@"
+TEMP_FILE=$(mktemp /tmp/.env.XXXXXX)
+trap 'rm -f "$TEMP_FILE"' EXIT
+
+env | grep -vE '^(HOSTNAME|PWD|HOME|USER|_|PHP.*|php.*|PATH|SSH_AGENT_PID|LD_PRELOAD)=' > $TEMP_FILE
+
+sudo docker exec -u $(id -u):$(id -g) -w $(pwd) --env-file $TEMP_FILE -it ${NODE_CONTAINER} "$@"
