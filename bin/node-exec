@@ -5,6 +5,6 @@
 TEMP_FILE=$(mktemp /tmp/.env.XXXXXX)
 trap 'rm -f "$TEMP_FILE"' EXIT
 
-env | grep -vE '^(HOSTNAME|PWD|HOME|USER|_|PHP.*|php.*|PATH|SSH_AGENT_PID|LD_PRELOAD)=' > $TEMP_FILE
+env | grep -vE '^(HOSTNAME|PWD|HOME|USER|_|PHP.*|php.*|PATH|SSH_.*|LD_PRELOAD|SHLVL|TZ|LANG|LC_ALL|NODE_.*|VIRTUAL_.*)=' > $TEMP_FILE
 
 sudo docker exec -u $(id -u):$(id -g) -w $(pwd) --env-file $TEMP_FILE -it ${NODE_CONTAINER} "$@"
