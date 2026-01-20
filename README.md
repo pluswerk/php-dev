@@ -6,14 +6,14 @@ We recommend using [pluswerk/docker-global](https://github.com/pluswerk/docker-g
 
 # Tags
 
-- php versions supported: `8.0`-`8.4`
-- php versions unsupported: `5.6`-`7.4`
+- php versions supported: `8.1`-`8.5`
+- php versions unsupported: `5.6`-`8.0`
 - webserver supported: `nginx` and `apache`
 - alpine images: `-alpine`
 - examples
-  - `pluswerk/php-dev:nginx-8.4-alpine`
-  - `pluswerk/php-dev:apache-8.0-alpine`
-  - `pluswerk/php-dev:nginx-8.2`
+  - `pluswerk/php-dev:nginx-8.5-alpine`
+  - `pluswerk/php-dev:apache-8.1-alpine`
+  - `pluswerk/php-dev:nginx-8.4`
 - list of [all Tags](https://github.com/pluswerk/php-dev/pkgs/container/php-dev/versions?filters%5Bversion_type%5D=tagged)
 
 ## Setup
@@ -56,7 +56,7 @@ Example file: compose/Development/docker-compose.yml
 ```yaml
 services:
   web:
-    image: pluswerk/php-dev:nginx-8.4-alpine
+    image: pluswerk/php-dev:nginx-8.5-alpine
 
     volumes:
       - .:/app
